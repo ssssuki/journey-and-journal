@@ -28,15 +28,18 @@ The target audience are family and friends who want to post and remember their v
 
 ### DB Setup
 
-1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
-2. Update the .env file with your correct local information
+1. In vagrant machine type `psql -U vagrant -d template1`
+2. Then create the database `CREATE DATABASE final OWNER labber;`
+
+3. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
+4. Update the .env file with your correct local information
 
 - username: `labber`
 - password: `labber`
-- database: `midterm`
+- database: `final`
 
-3. Install dependencies: `npm i`
-4. Reset database: `npm run db:reset`
+5. Install dependencies: `npm i`
+6. Reset database: `npm run db:reset`
 
 - Check the db folder to see what gets created and seeded in the SDB
 
