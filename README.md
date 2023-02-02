@@ -18,3 +18,9 @@ The target audience are family and friends who want to post and remember their v
 - Erik Wehrmann
 - Karen Mui
 - Susu Xiang
+
+#### Stack Choices
+
+- Front-End: ReactJS
+- Back-End: ExpressJS
+- Database: PostgreSQL
