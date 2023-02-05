@@ -1,7 +1,19 @@
 import "./App.css";
+import { useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
-  return <div className="App"></div>;
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/').then(res => {
+      console.log('hi')
+      console.log(res.data);
+    });
+  }, []);
+
+  return <div className="App">
+    Home
+  </div>;
 }
 
 export default App;
