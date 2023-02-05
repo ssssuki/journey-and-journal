@@ -8,6 +8,7 @@ export default function CreatePost() {
         <input name="address" type="text" placeholder="Address" />
         <input name="picture_url" type="test" placeholder="Picture" />
         <input name="entry" type="text" placeholder="Journal Entry" />
+        <></>
       </form>
       <button onClick={console.log("submit")}>Submit</button>
     </div>
