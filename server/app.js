@@ -3,11 +3,15 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const cors = require('cors'); // cors require
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 
 const app = express();
+
+// cors middleware usage
+app.use(cors())
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
