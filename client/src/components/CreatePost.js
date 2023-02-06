@@ -2,13 +2,14 @@ import React, { useState, useCallback } from "react";
 import {
   GoogleMap,
   useJsApiLoader,
-  Marker,
-  InfoWindow,
+  // Marker,
+  // InfoWindow,
 } from "@react-google-maps/api";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
+import useOnclickOutside from "react-cool-onclickoutside";
 
 const containerStyle = {
   width: "33vw",
@@ -22,10 +23,78 @@ const center = {
 export default function CreatePost() {
   const [state, setState] = useState({
     title: "",
+    latitude: null,
+    longitude: null,
     address: "",
     picture_url: "",
     entry: "",
   });
+
+  const PlacesAutocomplete = () => {
+    const {
+      ready,
+      value,
+      suggestions: { status, data },
+      setValue,
+      clearSuggestions,
+    } = usePlacesAutocomplete({
+      requestOptions: {},
+      debounce: 300,
+    });
+
+    const ref = useOnclickOutside(() => {
+      clearSuggestions();
+    });
+
+    const handleInput = (e) => {
+      setValue(e.target.value);
+    };
+
+    const handleSelect =
+      ({ description }) =>
+      () => {
+        setValue(description, false);
+        clearSuggestions();
+
+        getGeocode({ address: description }).then((results) => {
+          const { lat, lng } = getLatLng(results[0]);
+          // console.log("📍 Coordinates: ", { lat, lng });
+          // console.log(description);
+          setState({
+            ...state,
+            latitude: lat,
+            longitude: lng,
+            address: description,
+          });
+        });
+      };
+
+    const renderSuggestions = () =>
+      data.map((suggestion) => {
+        const {
+          place_id,
+          structured_formatting: { main_text, secondary_text },
+        } = suggestion;
+
+        return (
+          <li key={place_id} onClick={handleSelect(suggestion)}>
+            <strong>{main_text}</strong> <small>{secondary_text}</small>
+          </li>
+        );
+      });
+
+    return (
+      <div ref={ref}>
+        <input
+          value={value}
+          onChange={handleInput}
+          disabled={!ready}
+          placeholder="Where did you go?"
+        />
+        {status === "OK" && <ul>{renderSuggestions()}</ul>}
+      </div>
+    );
+  };
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -50,10 +119,11 @@ export default function CreatePost() {
 
   return (
     <div>
+      <PlacesAutocomplete />
       {isLoaded ? (
         <GoogleMap
           mapContainerStyle={containerStyle}
-          zoom={0}
+          zoom={10}
           center={center}
           onLoad={onLoad}
           onUnmount={onUnmount}
