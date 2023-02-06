@@ -5,16 +5,22 @@ import "./index.css";
 import App from "./App";
 import CreatePost from "./components/CreatePost";
 import reportWebVitals from "./reportWebVitals";
+import Application from "./components/Application";
+import Posts from "./components/Posts";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <Application />,
   },
   {
     path: "/create",
     element: <CreatePost />,
   },
+  {
+    path: "/posts",
+    element: <Posts />,
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
