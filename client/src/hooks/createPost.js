@@ -1,8 +1,9 @@
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function createPost(data) {
   return axios
-    .put(`${process.env.REACT_APP_SERVER_API_KEY}api/posts`, { data })
+    .put(`http://localhost:8080/api/posts`, { data })
     .then((res) => {
       console.log(res);
     })

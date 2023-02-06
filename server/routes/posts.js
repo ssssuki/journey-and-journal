@@ -6,5 +6,25 @@ module.exports = (db) => {
       response.json(posts);
     });
   });
+  router.put("/posts", (request, response) => {
+    const {
+      user_id,
+      title,
+      entry,
+      rating,
+      photo_link,
+      latitude,
+      longitude,
+      address,
+    } = request.body.data;
+    db.query(
+      `
+      INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, address) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
+    `,
+      [user_id, title, entry, rating, photo_link, latitude, longitude, address]
+    )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  });
   return router;
 };
