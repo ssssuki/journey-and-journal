@@ -1,6 +1,3 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-
 export default function Home () {
 
   const [posts, setPosts] = useState([]);
@@ -13,10 +10,20 @@ export default function Home () {
     });
   }, []);
 
+  const postsArray = posts.map(post => {
+    return (
+      < Home
+      key={post.id}
+      title={post.title}
+      photo={post.photo_link}
+      locality={post.locality}
+      />
+    )
+  });
+
 
   return(
     <div>I am home component
-      {posts.map(post => <li>{ post.id } { post.photo_link } {post.locality} {post.title}</li>)}
     </div>
   )
 }

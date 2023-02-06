@@ -1,2 +1,71 @@
-INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, locality) VALUES (1, 'CN Tower', 'Today I went to the CN Tower', 4, 'https://www.cntower.ca/sites/default/files/styles/16_9_scale_and_crop_large/public/images/explore-cn-tower%20.jpg?h=5ce0254a&itok=A_rLcJHm', '43.641566', '-79.387057', 'Toronto');
-INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, locality) VALUES (2, 'Koko Head', 'I hiked up an old WWII railway on a crater in Oahu', 4, 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcSiE-ps8jwkglqu9qhMr3N-iXQkXu71b4TllCOriYgKJqcgjFH0XkrMPeq0jJEexJ2x', '21.262127', '-157.703867', 'Honolulu');
+INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, address) 
+VALUES (
+  1, 
+  'CN Tower', 
+  'Today I went to the CN Tower', 
+  4, 
+  'https://www.connectingtraveller.com/images/localtip/1665245016carson-van-tol-y-RCl_SWWuo-unsplash.jpg', 
+  43.641566, 
+  -79.387057, 
+  'Toronto'
+  );
+
+INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, address) 
+VALUES (
+  2, 
+  'Mont Tremblant', 
+  'Fun place to ski', 
+  5, 
+  'https://a.travel-assets.com/findyours-php/viewfinder/images/res70/494000/494746-mont-tremblant.jpg?impolicy=fcrop&w=1040&h=580&q=mediumHigh', 
+  46.118462, 
+  -74.596185, 
+  'Mont-Tremblant'
+  );
+
+INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, address) 
+VALUES (
+  3, 
+  'Empire State Building', 
+  'Big scary tower', 
+  1, 
+  'https://www.ourescapeclause.com/wp-content/uploads/2019/02/NewYorkJan2019-47.jpg', 
+  40.748441,
+  -73.985664,
+  'New York'
+  );
+
+INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, address) 
+VALUES (
+  2, 
+  'Casa Loma', 
+  'Who built a castle in toronto', 
+  4, 
+  'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/3a/0a/7b/casa-loma-gardens.jpg?w=2000&h=-1&s=1', 
+  43.678037,
+  -79.409444, 
+  'Toronto'
+  );
+
+INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, address) 
+VALUES (
+  3, 
+  'Medieval Times', 
+  'Just a bunch of horses and stuff I dont get it', 
+  1, 
+  'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/bb/55/e3/photo4jpg.jpg?w=2200&h=-1&s=1', 
+  43.63265,
+  -79.425526, 
+  'Toronto'
+  );
+
+INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, address) 
+VALUES (
+  1, 
+  'Parliament', 
+  'Super underwhelming', 
+  2, 
+  'https://cdn.britannica.com/29/179429-050-EDBCAE49/Parliament-Buildings-Ottawa.jpg', 
+  45.423594,
+  -75.700929,
+  'Ottawa'
+  );
