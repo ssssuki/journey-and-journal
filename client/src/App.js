@@ -1,11 +1,8 @@
 import "./App.css";
 import { Route , Routes } from "react-router-dom";
 
-import { useEffect } from 'react';
-import axios from 'axios';
-
 // Pages
-import Home from "./pages/Home";
+import HomePage from "./pages/HomePage";
 
 function App() {
 
@@ -14,7 +11,7 @@ function App() {
     <Routes>
       <Route
         exact path="/"
-        element={<Home />}>
+        element={<HomePage />}>
       </Route>
     </Routes>
   </div>;

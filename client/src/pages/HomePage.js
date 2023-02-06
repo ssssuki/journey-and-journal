@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import axios from 'axios';
 
-export default function Home() {
+// Component
+import Home from "../components/Home"
+
+export default function HomePage() {
 
   useEffect(() => {
     axios.get('http://localhost:8080/').then(res => {
@@ -10,5 +13,7 @@ export default function Home() {
     });
   }, []);
 
-  return <h1>"I am home!"</h1>
+  return <h1>"I am home page!"
+    <Home />
+  </h1>
 }
