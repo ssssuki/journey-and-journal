@@ -8,6 +8,6 @@ CREATE TABLE posts (
   photo_link TEXT NOT NULL,
   latitude DECIMAL(8,6) NOT NULL,
   longitude DECIMAL(9,6) NOT NULL,
-  locality VARCHAR(255) NOT NULL,
+  address VARCHAR(255) NOT NULL,
   date_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

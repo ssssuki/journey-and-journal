@@ -1,4 +1,4 @@
-INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, locality) 
+INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, address) 
 VALUES (
   1, 
   'CN Tower', 
@@ -10,7 +10,7 @@ VALUES (
   'Toronto'
   );
 
-INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, locality) 
+INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, address) 
 VALUES (
   2, 
   'Mont Tremblant', 
@@ -22,7 +22,7 @@ VALUES (
   'Mont-Tremblant'
   );
 
-INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, locality) 
+INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, address) 
 VALUES (
   3, 
   'Empire State Building', 
@@ -34,7 +34,7 @@ VALUES (
   'New York'
   );
 
-INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, locality) 
+INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, address) 
 VALUES (
   2, 
   'Casa Loma', 
@@ -46,7 +46,7 @@ VALUES (
   'Toronto'
   );
 
-INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, locality) 
+INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, address) 
 VALUES (
   3, 
   'Medieval Times', 
@@ -58,7 +58,7 @@ VALUES (
   'Toronto'
   );
 
-INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, locality) 
+INSERT INTO posts (user_id, title, entry, rating, photo_link, latitude, longitude, address) 
 VALUES (
   1, 
   'Parliament', 
