@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  BrowserRouter,
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import CreatePost from "./components/CreatePost";
@@ -19,6 +23,11 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  // <BrowserRouter>
+  //     <React.StrictMode>
+  //       <App />
+  //     </React.StrictMode>
+  // </BrowserRouter>
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
