@@ -6,18 +6,24 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
-import App from "./App";
+import HomePage from "./pages/HomePage";
 import CreatePost from "./components/CreatePost";
 import reportWebVitals from "./reportWebVitals";
+import Application from "./components/Application";
+import Posts from "./components/Posts";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <HomePage />,
   },
   {
     path: "/create",
     element: <CreatePost />,
+  },
+  {
+    path: "/posts",
+    element: <Posts />,
   },
 ]);
 

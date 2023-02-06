@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default function createPost(data) {
   return axios
-    .put(`api/posts`, { data })
+    .put(`${process.env.REACT_APP_SERVER_API_KEY}api/posts`, { data })
     .then((res) => {
       console.log(res);
     })
