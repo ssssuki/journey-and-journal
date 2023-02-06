@@ -104,8 +104,9 @@ export default function CreatePost() {
   const [map, setMap] = useState(null);
 
   const onLoad = useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
+    // const bounds = new window.google.maps.LatLngBounds(center);
+    // map.fitBounds(bounds);
+    map.setZoom(12);
     setMap(map);
   }, []);
 
@@ -123,8 +124,11 @@ export default function CreatePost() {
       {isLoaded ? (
         <GoogleMap
           mapContainerStyle={containerStyle}
-          zoom={10}
-          center={center}
+          center={
+            state.longitude && state.latitude
+              ? { lat: state.latitude, lng: state.longitude }
+              : center
+          }
           onLoad={onLoad}
           onUnmount={onUnmount}
         ></GoogleMap>
