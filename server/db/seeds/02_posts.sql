@@ -4,7 +4,7 @@ VALUES (
   'CN Tower', 
   'Today I went to the CN Tower', 
   4, 
-  'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FCN_Tower&psig=AOvVaw1xgbh5ZetsrqpRS7xfmvvI&ust=1675548333960000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLDn6ouu-vwCFQAAAAAdAAAAABAE', 
+  'https://www.connectingtraveller.com/images/localtip/1665245016carson-van-tol-y-RCl_SWWuo-unsplash.jpg', 
   43.641566, 
   -79.387057, 
   'Toronto'
@@ -64,7 +64,7 @@ VALUES (
   'Parliament', 
   'Super underwhelming', 
   2, 
-  'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FCN_Tower&psig=AOvVaw1xgbh5ZetsrqpRS7xfmvvI&ust=1675548333960000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLDn6ouu-vwCFQAAAAAdAAAAABAE', 
+  'https://cdn.britannica.com/29/179429-050-EDBCAE49/Parliament-Buildings-Ottawa.jpg', 
   45.423594,
   -75.700929,
   'Ottawa'
