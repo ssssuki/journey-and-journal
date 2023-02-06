@@ -1,18 +1,22 @@
 import "./App.css";
+import { Route , Routes } from "react-router-dom";
+
 import { useEffect } from 'react';
 import axios from 'axios';
 
-function App() {
+// Pages
+import Home from "./pages/Home";
 
-  useEffect(() => {
-    axios.get('http://localhost:8080/').then(res => {
-      console.log('hi')
-      console.log(res.data);
-    });
-  }, []);
+function App() {
 
   return <div className="App">
     Home
+    <Routes>
+      <Route
+        exact path="/"
+        element={<Home />}>
+      </Route>
+    </Routes>
   </div>;
 }
 
