@@ -10,6 +10,7 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
+import createPost from "../hooks/createPost";
 
 const containerStyle = {
   width: "33vw",
@@ -104,9 +105,7 @@ export default function CreatePost() {
   const [map, setMap] = useState(null);
 
   const onLoad = useCallback(function callback(map) {
-    // const bounds = new window.google.maps.LatLngBounds(center);
-    // map.fitBounds(bounds);
-    map.setZoom(12);
+    map.setZoom(13);
     setMap(map);
   }, []);
 
@@ -115,7 +114,18 @@ export default function CreatePost() {
   }, []);
 
   function submitPost() {
-    console.log(state);
+    const data = {
+      user_id: 1,
+      title: state.title,
+      entry: state.entry,
+      rating: 4,
+      photo_link: state.picture_url,
+      latitude: state.latitude,
+      longitude: state.longitude,
+      address: state.address,
+    };
+
+    createPost(data);
   }
 
   return (
@@ -131,7 +141,13 @@ export default function CreatePost() {
           }
           onLoad={onLoad}
           onUnmount={onUnmount}
-        ></GoogleMap>
+        >
+          {/* {state.longitude && state.latitude ? (
+            <Marker lat={state.latitude} lng={state.longitude} />
+          ) : (
+            <></>
+          )} */}
+        </GoogleMap>
       ) : (
         <></>
       )}
