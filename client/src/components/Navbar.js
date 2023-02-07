@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
   const [search, setSearch] = useState("");
@@ -19,6 +20,14 @@ export default function Navbar(props) {
         />
       </form>
       <button onClick={() => handleSearch(search)}>Go!</button>
+      <button>
+        Login
+        <Link to="/login" />
+      </button>
+      <button>
+        Logout
+        <Link to="logout" />
+      </button>
     </div>
   );
 }
