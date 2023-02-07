@@ -11,7 +11,7 @@ export default function Posts(props) {
   const postList = state.posts.map((post) => {
     const commentList = state.comments.filter((comment) => comment.post_id === post.id).map((comment) => {
       return (
-        <p>Comment: {comment.content} User: {comment.user_id}</p>
+        <p>Comment: {comment.content} By User: {comment.user_id}</p>
       );
     });
     return (
