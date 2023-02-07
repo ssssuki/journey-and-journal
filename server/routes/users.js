@@ -1,26 +1,24 @@
-const express = require("express");
-const router = express.Router();
-
-/* GET users listing. */
+const router = require("express").Router();
 
 module.exports = (db) => {
-  router.get("/user/:id", (req, res) => {
-    db.query(`
-      SELECT posts.* FROM posts
-      LEFT JOIN users
-      ON user.id = user_id
-      WHERE user_id = $1;
-    `, [req.params.id])
-    .then(result => {
-      res.json(result.rows);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
+  router.get("/users", (request, response) => {
+    db.query(`SELECT * FROM users;`).then(({ rows: posts }) => {
+      response.json(posts);
     });
   });
-  return router;  
-}
-
-
+  router.get(`/users/:id`, (request, response) => {
+    db.query(`
+      SELECT * 
+      FROM users
+      LEFT JOIN posts
+      ON users.id = user_id 
+      WHERE id=${request.params.id};
+      `)
+    .then(
+      ({ rows: posts }) => {
+        response.json(posts);
+      }
+    );
+  });
+  return router;
+};

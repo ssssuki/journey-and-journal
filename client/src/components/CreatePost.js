@@ -11,6 +11,7 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
 import createPost from "../hooks/createPost";
+import Navbar from "./Navbar";
 
 const containerStyle = {
   width: "33vw",
@@ -130,6 +131,7 @@ export default function CreatePost() {
 
   return (
     <div>
+      <Navbar></Navbar>
       <PlacesAutocomplete />
       {isLoaded ? (
         <GoogleMap
