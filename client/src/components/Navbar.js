@@ -1,23 +1,29 @@
 import React, { useState } from "react";
-import { useCookies } from "react-cookie";
+import useUser from "../hooks/useUser";
+// import { useCookies } from "react-cookie";
+// import setUser from "../hooks/setUser";
 
 export default function Navbar(props) {
   const [search, setSearch] = useState("");
-  const [cookies, setCookie, removeCookie] = useCookies(["session"]);
+  // const [cookies, setCookie, removeCookie] = useCookies(["session"]);
+
+  const { login, logout, cookies } = useUser();
 
   const handleSearch = (search) => {
     console.log(search);
   };
 
-  const login = () => {
-    setCookie("session", 1);
-    console.log(cookies.session);
-  };
+  // const login = (id) => {
+  //   const user = setUser(id).then(() => {
+  //     setCookie("session", user);
+  //     console.log(cookies.session);
+  //   });
+  // };
 
-  const logout = () => {
-    removeCookie("session");
-    console.log(cookies.session);
-  };
+  // const logout = () => {
+  //   removeCookie("session");
+  //   console.log(cookies.session);
+  // };
 
   return (
     <div>
@@ -33,9 +39,15 @@ export default function Navbar(props) {
       </form>
       <button onClick={() => handleSearch(search)}>Go!</button>
       {!cookies.session ? (
-        <button onClick={() => login()}>Login</button>
+        <>
+          <button onClick={() => login(2)}>Login As Bob</button>
+          <button onClick={() => login(3)}>Login As Jessie</button>
+        </>
       ) : (
-        <button onClick={() => logout()}>Logout</button>
+        <>
+          <span>Logged in as {cookies.session.username}</span>
+          <button onClick={() => logout()}>Logout</button>
+        </>
       )}
     </div>
   );
