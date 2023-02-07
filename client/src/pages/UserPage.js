@@ -6,7 +6,7 @@ export default function HomePage() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/user/1`)
+    axios.get(`http://localhost:8080/api/users/1`)
       .then(res => {
         console.log(res.data);
         setPosts(res.data);

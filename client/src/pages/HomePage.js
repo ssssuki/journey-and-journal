@@ -27,8 +27,8 @@ export default function HomePage() {
   });
 
   return <h1>"I am home page!"
-    <container>
+    <div>
       {postsArray}
-    </container>
+    </div>
   </h1>;
 }

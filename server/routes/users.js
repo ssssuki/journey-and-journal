@@ -12,7 +12,7 @@ module.exports = (db) => {
       FROM users
       LEFT JOIN posts
       ON users.id = user_id 
-      WHERE id=${request.params.id};
+      WHERE users.id=${request.params.id};
       `)
     .then(
       ({ rows: posts }) => {
