@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom'
 import useUser from "../hooks/useUser"
 
 
 export default function HomePage() {
 
   const [user, setUser] = useState([]);
-  const userID = useParams().id;
+  const { cookies } = useUser();
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/users/${userID}`)
+    axios.get(`http://localhost:8080/api/users/${cookies.session.id}`)
       .then(res => {
         console.log(res.data);
         setUser(res.data);
@@ -18,7 +17,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <h1>User Page {userID}</h1>
+    <h1>My user Page</h1>
   )
 
 }

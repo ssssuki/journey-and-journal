@@ -10,6 +10,7 @@ import "./index.css";
 import HomePage from "./pages/HomePage";
 import CreatePost from "./components/CreatePost";
 import UserPage from "./pages/UserPage";
+import MyProfilePage from "./pages/MyProfilePage"
 import reportWebVitals from "./reportWebVitals";
 // import Application from "./components/Application";
 import Posts from "./components/Posts";
@@ -28,9 +29,14 @@ const router = createBrowserRouter([
     element: <Posts />,
   },
   {
-    path: "/user",
+    path: "/user/:id",
     element: <UserPage />
+  },
+  {
+    path: "/myprofile",
+    element: <MyProfilePage />
   }
+
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
