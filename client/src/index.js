@@ -8,8 +8,9 @@ import {
 import "./index.css";
 import HomePage from "./pages/HomePage";
 import CreatePost from "./components/CreatePost";
+import UserPage from "./pages/UserPage";
 import reportWebVitals from "./reportWebVitals";
-import Application from "./components/Application";
+// import Application from "./components/Application";
 import Posts from "./components/Posts";
 
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
     path: "/posts",
     element: <Posts />,
   },
+  {
+    path: "/user",
+    element: <UserPage />
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

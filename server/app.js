@@ -28,7 +28,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/api/user", user(db));
+app.use("/api", user(db));
 app.use("/api", posts(db));
 
 // catch 404 and forward to error handler
