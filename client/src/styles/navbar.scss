@@ -4,8 +4,10 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 10px;
-
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: grey;
+  border-bottom: 2px rgb(0, 0, 0) solid;
 }
 
 .nav-bar-item {
@@ -13,6 +15,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .btn {
@@ -21,6 +25,5 @@
 }
 
 .search-bar {
-  height: 3em;
-  width: 30%;
+  width: 300px;
 }

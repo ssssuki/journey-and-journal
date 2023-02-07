@@ -2,41 +2,88 @@ import React, { useState } from "react";
 import useUser from "../hooks/useUser";
 import "../styles/navbar.scss";
 import { useNavigate } from "react-router-dom";
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
+import useOnclickOutside from "react-cool-onclickoutside";
 
-export default function Navbar(props) {
-  const [search, setSearch] = useState("");
-
+export default function Navbar() {
   const { login, logout, cookies } = useUser();
 
   const navigate = useNavigate();
 
-  const handleSearch = (search) => {
-    console.log(search);
+  const PlacesAutocomplete = () => {
+    const {
+      ready,
+      value,
+      suggestions: { status, data },
+      setValue,
+      clearSuggestions,
+    } = usePlacesAutocomplete({
+      requestOptions: {},
+      debounce: 300,
+    });
+
+    const ref = useOnclickOutside(() => {
+      clearSuggestions();
+    });
+
+    const handleInput = (e) => {
+      setValue(e.target.value);
+    };
+
+    const handleSelect =
+      ({ description }) =>
+      () => {
+        setValue(description, false);
+        clearSuggestions();
+
+        getGeocode({ address: description }).then((results) => {
+          const { lat, lng } = getLatLng(results[0]);
+          navigate("/search", { state: { lat, lng } });
+        });
+      };
+
+    const renderSuggestions = () =>
+      data.map((suggestion) => {
+        const {
+          place_id,
+          structured_formatting: { main_text, secondary_text },
+        } = suggestion;
+
+        return (
+          <li
+            className="search-suggestion"
+            key={place_id}
+            onClick={handleSelect(suggestion)}
+          >
+            <strong>{main_text}</strong> <small>{secondary_text}</small>
+          </li>
+        );
+      });
+
+    return (
+      <div ref={ref}>
+        <input
+          className="search-bar"
+          value={value}
+          onChange={handleInput}
+          disabled={!ready}
+          placeholder="Search by Location!"
+        />
+        {status === "OK" && <ul>{renderSuggestions()}</ul>}
+      </div>
+    );
   };
+
   return (
     <div className="nav-bar">
       <div className="nav-bar-item">
         <h1 onClick={() => navigate("/")}>Logo</h1>
       </div>
       <div className="nav-bar-item">
-        <form
-          classname="search-bar"
-          onSubmit={(event) => event.preventDefault()}
-        >
-          <input
-            name="search-query"
-            type="text"
-            placeholder="Search by Location!"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-          />
-        </form>
-        <button
-          className="btn btn-primary"
-          onClick={() => handleSearch(search)}
-        >
-          Go!
-        </button>
+        <PlacesAutocomplete />
       </div>
       <div className="nav-bar-item">
         {!cookies.session ? (
