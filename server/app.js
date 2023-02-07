@@ -8,7 +8,7 @@ const cors = require("cors"); // cors require
 const db = require("./db/connection");
 
 const indexRouter = require("./routes/index");
-const users = require("./routes/users");
+const user = require("./routes/users");
 const posts = require("./routes/posts");
 const comments = require("./routes/comments");
 const searches = require("./routes/searches");
@@ -30,7 +30,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/api", users(db));
+app.use("/api", user(db));
 app.use("/api", posts(db));
 app.use("/api", comments(db));
 app.use("/api", searches(db));
