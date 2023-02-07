@@ -1,10 +1,22 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export default function Navbar(props) {
   const [search, setSearch] = useState("");
+  const [cookies, setCookie, removeCookie] = useCookies(["session"]);
+
   const handleSearch = (search) => {
     console.log(search);
+  };
+
+  const login = () => {
+    setCookie("session", 1);
+    console.log(cookies.session);
+  };
+
+  const logout = () => {
+    removeCookie("session");
+    console.log(cookies.session);
   };
 
   return (
@@ -20,14 +32,11 @@ export default function Navbar(props) {
         />
       </form>
       <button onClick={() => handleSearch(search)}>Go!</button>
-      <button>
-        Login
-        <Link to="/login" />
-      </button>
-      <button>
-        Logout
-        <Link to="logout" />
-      </button>
+      {!cookies.session ? (
+        <button onClick={() => login()}>Login</button>
+      ) : (
+        <button onClick={() => logout()}>Logout</button>
+      )}
     </div>
   );
 }
