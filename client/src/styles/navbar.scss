@@ -1,0 +1,26 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+
+}
+
+.nav-bar-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  height: 3em;
+  margin: 3px;
+}
+
+.search-bar {
+  height: 3em;
+  width: 30%;
+}

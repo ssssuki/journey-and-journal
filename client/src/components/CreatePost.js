@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import "../styles/createPost.scss";
 import {
   GoogleMap,
   useJsApiLoader,
