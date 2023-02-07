@@ -18,6 +18,7 @@ export default function HomePage() {
     return (
       < Home
         key={post.id}
+        id={post.id}
         title={post.title}
         photo={post.photo_link}
         address={post.address}
@@ -26,8 +27,8 @@ export default function HomePage() {
   });
 
   return <h1>"I am home page!"
-    <ul>
+    <container>
       {postsArray}
-    </ul>
+    </container>
   </h1>;
 }
