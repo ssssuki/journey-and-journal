@@ -4,18 +4,23 @@ import axios from "axios";
 export default function useApplicationData(props) {
   const [state, setState] = useState({
     posts: {},
+    comments: {},
     isLoading: true,
   });
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/posts").then((res) => {
+    Promise.all([
+      axios.get("http://localhost:8080/api/posts"),
+      axios.get("http://localhost:8080/api/comments"),
+    ]).then((all) => {
       setState((prev) => ({
         ...prev,
-        posts: res.data,
+        posts: all[0].data,
+        comments: all[1].data,
         isLoading: false,
       }));
     });
-  }, [setState]);
+  }, []);
 
   return {
     state: state,
