@@ -2,6 +2,9 @@ import React, { useState } from "react";
 
 export default function Navbar(props) {
   const [search, setSearch] = useState("");
+  const handleSearch = (search) => {
+    console.log(search);
+  };
 
   return (
     <div>
@@ -15,12 +18,7 @@ export default function Navbar(props) {
           onChange={(event) => setSearch(event.target.value)}
         />
       </form>
-      <button onClick={() => handleSearch(search)}></button>
-      {props.session ? (
-        <button onClick={() => console.log("Logout Button")}>Log Out</button>
-      ) : (
-        <button onClick={() => console.log("Login Button")}>Log In</button>
-      )}
+      <button onClick={() => handleSearch(search)}>Go!</button>
     </div>
   );
 }
