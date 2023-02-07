@@ -7,7 +7,7 @@ export default function HomePage() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/')
+    axios.get(process.env.REACT_APP_SERVER_API_KEY)
       .then(res => {
         console.log(res.data);
         setPosts(res.data);
@@ -20,7 +20,7 @@ export default function HomePage() {
         key={post.id}
         title={post.title}
         photo={post.photo_link}
-        locality={post.locality}
+        address={post.address}
       />
     );
   });
