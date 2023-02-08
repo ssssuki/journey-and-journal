@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom'
-import useUser from "../hooks/useUser"
+import SmallPostItem from '../components/SmallPostItem';
 
 
 export default function HomePage() {
 
-  const [user, setUser] = useState([]);
+  const [posts, setUser] = useState([]);
   const userID = useParams().id;
 
   useEffect(() => {
@@ -17,8 +17,23 @@ export default function HomePage() {
       });
   }, []);
 
+  const postsArray = posts.map(post => {
+    return (
+      < SmallPostItem
+        key={post.id}
+        id={post.id}
+        title={post.title}
+        photo={post.photo_link}
+        address={post.address}
+      />
+    );
+  });
+
   return (
-    <h1>User Page {userID}</h1>
+    <div>
+      <h1>User Page {userID}</h1>
+      {postsArray}
+    </div>
   )
 
 }

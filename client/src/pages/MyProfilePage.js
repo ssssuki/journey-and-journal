@@ -1,23 +1,39 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import useUser from "../hooks/useUser"
+import SmallPostItem from '../components/SmallPostItem';
 
 
 export default function HomePage() {
 
-  const [user, setUser] = useState([]);
+  const [posts, setPosts] = useState([]);
   const { cookies } = useUser();
 
   useEffect(() => {
     axios.get(`http://localhost:8080/api/users/${cookies.session.id}`)
       .then(res => {
         console.log(res.data);
-        setUser(res.data);
+        setPosts(res.data);
       });
   }, []);
 
+  const postsArray = posts.map(post => {
+    return (
+      < SmallPostItem
+        key={post.id}
+        id={post.id}
+        title={post.title}
+        photo={post.photo_link}
+        address={post.address}
+      />
+    );
+  });
+
   return (
-    <h1>My user Page</h1>
-  )
+    <div>
+      <h1>My user Page</h1>
+      {postsArray}
+    </div>
+    )
 
 }

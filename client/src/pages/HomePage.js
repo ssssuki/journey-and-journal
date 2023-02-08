@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Home from "../components/Home";
+import SmallPostItem from "../components/SmallPostItem";
 
 export default function HomePage() {
 
@@ -16,7 +16,7 @@ export default function HomePage() {
 
   const postsArray = posts.map(post => {
     return (
-      < Home
+      < SmallPostItem
         key={post.id}
         id={post.id}
         title={post.title}
