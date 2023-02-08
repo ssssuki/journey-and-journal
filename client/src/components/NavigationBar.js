@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import useUser from "../hooks/useUser";
+import  Navbar from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container"
+import "bootstrap/dist/css/bootstrap.min.css"
+import "../styles/NavigationBar.scss"
 // import { useCookies } from "react-cookie";
 // import setUser from "../hooks/setUser";
 
-export default function Navbar(props) {
+export default function NavigationBar(props) {
   const [search, setSearch] = useState("");
   // const [cookies, setCookie, removeCookie] = useCookies(["session"]);
 
@@ -26,8 +30,12 @@ export default function Navbar(props) {
   // };
 
   return (
-    <div>
-      <h1>Logo</h1>
+    <>
+      <Navbar bg="light" expand="lg" variant="dark">
+        <Container>
+      <img
+        alt="logo">
+      </img>
       <form onSubmit={(event) => event.preventDefault()}>
         <input
           name="search-query"
@@ -49,6 +57,8 @@ export default function Navbar(props) {
           <button onClick={() => logout()}>Logout</button>
         </>
       )}
-    </div>
+      </Container>
+      </Navbar>
+    </>
   );
 }
