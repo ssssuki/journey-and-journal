@@ -10,9 +10,12 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
+import { useNavigate } from "react-router-dom";
 import useOnclickOutside from "react-cool-onclickoutside";
 import createPost from "../hooks/createPost";
 import Navbar from "./Navbar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const containerStyle = {
   width: "33vw",
@@ -31,7 +34,10 @@ export default function CreatePost() {
     address: "",
     picture_url: "",
     entry: "",
+    rating: 0,
   });
+
+  const navigate = useNavigate();
 
   const PlacesAutocomplete = () => {
     const {
@@ -128,6 +134,7 @@ export default function CreatePost() {
     };
 
     createPost(data);
+    navigate("/");
   }
 
   return (
@@ -183,6 +190,48 @@ export default function CreatePost() {
           }
         />
       </form>
+      <h3>
+        <span style={state.rating >= 1 ? { color: "gold" } : {}}>
+          <FontAwesomeIcon
+            icon={faStar}
+            onClick={() => {
+              setState({ ...state, rating: 1 });
+            }}
+          />
+        </span>
+        <span style={state.rating >= 2 ? { color: "gold" } : {}}>
+          <FontAwesomeIcon
+            icon={faStar}
+            onClick={() => {
+              setState({ ...state, rating: 2 });
+            }}
+          />
+        </span>
+        <span style={state.rating >= 3 ? { color: "gold" } : {}}>
+          <FontAwesomeIcon
+            icon={faStar}
+            onClick={() => {
+              setState({ ...state, rating: 3 });
+            }}
+          />
+        </span>
+        <span style={state.rating >= 4 ? { color: "gold" } : {}}>
+          <FontAwesomeIcon
+            icon={faStar}
+            onClick={() => {
+              setState({ ...state, rating: 4 });
+            }}
+          />
+        </span>
+        <span style={state.rating >= 5 ? { color: "gold" } : {}}>
+          <FontAwesomeIcon
+            icon={faStar}
+            onClick={() => {
+              setState({ ...state, rating: 5 });
+            }}
+          />
+        </span>
+      </h3>
       <button onClick={() => submitPost()}>Post</button>
     </div>
   );

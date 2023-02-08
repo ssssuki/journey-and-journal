@@ -30,35 +30,41 @@ export default function IndividualPost(props) {
     createComment(comment);
   }
 
-    return (
-      <section>
-        <div className="individualPost">
-          <div className="photos">
-            <img src={state.post.photo_link} height="200" />
+  return (
+    <div>
+      {state.isLoading ? (
+        <p>loading</p>
+      ) : (
+        <section>
+          <div className="individualPost">
+            <div className="photos">
+              <img src={state.post.photo_link} height="200" />
+            </div>
+            <div className="userid">UserID: {state.post.user_id}</div>
+            <div className="postcontent">
+              Title: {state.post.title} Entry: {state.post.entry}
+            </div>
+            <div className="rating">Rating: {state.post.rating}</div>
+            <div className="location">
+              Latitude: {state.post.latitude} Longitude: {state.post.longitude}
+            </div>
+            <div className="localty">Locality: {state.post.locality}</div>
           </div>
-          <div className="userid">UserID: {state.post.user_id}</div>
-          <div className="postcontent">
-            Title: {state.post.title} Entry: {state.post.entry}
-          </div>
-          <div className="rating">Rating: {state.post.rating}</div>
-          <div className="location">
-            Latitude: {state.post.latitude} Longitude: {state.post.longitude}
-          </div>
-          <div className="localty">Locality: {state.post.locality}</div>
-        </div>
-        <div className="comment">{commentList}</div>
-        <form onSubmit={(event) => event.preventDefault()}>
-          <input
-            name="comment"
-            type="text"
-            placeholder="Enter your comments!"
-            value={state.comment}
-            onChange={(event) =>
-              setState({ ...state, comment: event.target.value })
-            }
-          />
-        </form>
-        <button onClick={() => submitComment()}>Comment</button>
-      </section>
-    );
+          <div className="comment">{commentList}</div>
+          <form onSubmit={(event) => event.preventDefault()}>
+            <input
+              name="comment"
+              type="text"
+              placeholder="Enter your comments!"
+              value={state.comment}
+              onChange={(event) =>
+                setState({ ...state, comment: event.target.value })
+              }
+            />
+          </form>
+          <button onClick={() => submitComment()}>Comment</button>
+        </section>
+      )}
+    </div>
+  );
 }
