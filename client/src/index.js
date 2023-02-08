@@ -14,6 +14,7 @@ import reportWebVitals from "./reportWebVitals";
 // import Application from "./components/Application";
 import Posts from "./components/Posts";
 import SearchResults from "./components/SearchResults";
+import IndividualPost from "./components/IndividualPost";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/posts",
     element: <Posts />,
+  },
+  {
+    path: "/posts/:id",
+    element: <IndividualPost />,
   },
   {
     path: "/user",

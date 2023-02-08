@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function useApplicationData(props) {
+export default function useApplicationData(post_id) {
   const [state, setState] = useState({
+    post: null,
+    comment: null,
     posts: {},
     comments: {},
     isLoading: true,
@@ -24,5 +26,6 @@ export default function useApplicationData(props) {
 
   return {
     state: state,
+    setState: setState,
   };
 }
