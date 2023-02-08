@@ -6,5 +6,10 @@ module.exports = (db) => {
       response.json(posts);
     });
   });
+  router.get("/posts/:id", (request, response) => {
+    db.query(`SELECT * FROM posts WHERE id=${request.params.id}`).then(({ rows: posts }) => {
+      response.json(posts);
+    });
+  });
   return router;
 };
