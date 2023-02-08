@@ -6,7 +6,8 @@ export default function useUser() {
 
   function login(id) {
     axios.get(`http://localhost:8080/api/users/${id}`).then((res) => {
-      setCookie("session", res.data[0]);
+      const { id, username, role } = res.data[0];
+      setCookie("session", { id, username, role });
     });
   }
 
