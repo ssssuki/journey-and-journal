@@ -13,7 +13,6 @@ import usePlacesAutocomplete, {
 import { useNavigate } from "react-router-dom";
 import useOnclickOutside from "react-cool-onclickoutside";
 import createPost from "../hooks/createPost";
-import Navbar from "./Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
@@ -139,7 +138,6 @@ export default function CreatePost() {
 
   return (
     <div>
-      <Navbar></Navbar>
       <PlacesAutocomplete />
       {isLoaded ? (
         <GoogleMap

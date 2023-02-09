@@ -8,14 +8,14 @@ import {
 import { CookiesProvider } from "react-cookie";
 import "./index.css";
 import HomePage from "./pages/HomePage";
-import CreatePost from "./components/CreatePost";
+import CreatePage from "./pages/CreatePage";
 import UserPage from "./pages/UserPage";
-import MyProfilePage from "./pages/MyProfilePage"
+import MyProfilePage from "./pages/MyProfilePage";
 import reportWebVitals from "./reportWebVitals";
 // import Application from "./components/Application";
 import Posts from "./components/Posts";
-import SearchResults from "./components/SearchResults";
 import IndividualPost from "./components/IndividualPost";
+import SearchPage from "./pages/SearchPage";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/create",
-    element: <CreatePost />,
+    element: <CreatePage />,
   },
   {
     path: "/posts",
@@ -36,11 +36,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/user/:id",
-    element: <UserPage />
+    element: <UserPage />,
   },
   {
     path: "/myprofile",
-    element: <MyProfilePage />
+    element: <MyProfilePage />,
   },
   {
     path: "/posts/:id",
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/search/",
-    element: <SearchResults />,
+    element: <SearchPage />,
   },
 ]);
 
