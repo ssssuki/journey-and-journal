@@ -1,14 +1,18 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useSearch from "../hooks/useSearch";
 
-export default function SearchResults(props) {
+export default function SearchResults() {
   const location = useLocation();
+  const navigate = useNavigate();
+  if (!location.state) {
+    navigate("/");
+  }
   const { state } = useSearch(location.state.lat, location.state.lng);
 
   const renderedResults = state.posts.map((post) => {
     return (
-      <li>
+      <li key={post.id}>
         <h3>{post.title}</h3>
         <p>{post.entry}</p>
         <img src={post.photo_link}></img>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useNavigate } from "react";
 
 export default function useSearch(lat, lng) {
   const [state, setState] = useState({
@@ -14,5 +14,6 @@ export default function useSearch(lat, lng) {
         setState((prev) => ({ ...prev, posts: res.data, isLoading: false }));
       });
   }, []);
+
   return { state: state };
 }
