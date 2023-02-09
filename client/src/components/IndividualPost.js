@@ -2,22 +2,17 @@ import React, { useState, useCallback } from "react";
 import useApplicationData from "../hooks/useApplicationData";
 import { useParams } from "react-router-dom";
 import createComment from "../hooks/createComments";
-import {
-  GoogleMap,
-  useJsApiLoader,
-} from "@react-google-maps/api"
+import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
 
 const containerStyle = {
-  width: '400px',
-  height: '400px'
+  width: "400px",
+  height: "400px",
 };
 
 const center = {
   lat: -3.745,
-  lng: -38.523
+  lng: -38.523,
 };
-
-
 
 export default function IndividualPost(props) {
   let { id } = useParams();
@@ -62,51 +57,61 @@ export default function IndividualPost(props) {
     createComment(comment);
   }
 
-    return (
-      <section>
-        <div className="individualPost">
-          <div className="photos">
-            <img src={state.post.photo_link} height="200" />
-          </div>
-          <div className="userid">UserID: {state.post.user_id}</div>
-          <div className="postcontent">
-            Title: {state.post.title} Entry: {state.post.entry}
-          </div>
-          <div className="rating">Rating: {state.post.rating}</div>
+  const position = {
+    lat: Number(state.post.latitude),
+    lng: Number(state.post.longitude),
+  };
+
+  return (
+    <section>
+      <div className="individualPost">
+        <div className="photos">
+          <img src={state.post.photo_link} height="200" />
         </div>
-              {isLoaded ? (
+        <div className="userid">UserID: {state.post.user_id}</div>
+        <div className="postcontent">
+          Title: {state.post.title} Entry: {state.post.entry}
+        </div>
+        <div className="rating">Rating: {state.post.rating}</div>
+      </div>
+      {isLoaded ? (
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={
             state.post.longitude && state.post.latitude
-              ? { lat: Number(state.post.latitude), lng: Number(state.post.longitude) }
+              ? {
+                  lat: Number(state.post.latitude),
+                  lng: Number(state.post.longitude),
+                }
               : center
           }
           onLoad={onLoad}
           onUnmount={onUnmount}
         >
-          {/* {state.longitude && state.latitude ? (
-            <Marker lat={state.latitude} lng={state.longitude} />
-          ) : (
-            <></>
-          )} */}
+            <MarkerF position={
+              {
+                  lat: Number(state.post.latitude),
+                  lng: Number(state.post.longitude),
+                }
+          }
+               />
         </GoogleMap>
       ) : (
         <></>
       )}
-        <div className="comment">{commentList}</div>
-        <form onSubmit={(event) => event.preventDefault()}>
-          <input
-            name="comment"
-            type="text"
-            placeholder="Enter your comments!"
-            value={state.comment}
-            onChange={(event) =>
-              setState({ ...state, comment: event.target.value })
-            }
-          />
-        </form>
-        <button onClick={() => submitComment()}>Comment</button>
-      </section>
-    );
+      <div className="comment">{commentList}</div>
+      <form onSubmit={(event) => event.preventDefault()}>
+        <input
+          name="comment"
+          type="text"
+          placeholder="Enter your comments!"
+          value={state.comment}
+          onChange={(event) =>
+            setState({ ...state, comment: event.target.value })
+          }
+        />
+      </form>
+      <button onClick={() => submitComment()}>Comment</button>
+    </section>
+  );
 }
