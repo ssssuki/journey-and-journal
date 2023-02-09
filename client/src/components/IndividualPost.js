@@ -16,7 +16,8 @@ const center = {
 
 export default function IndividualPost(props) {
   let { id } = useParams();
-  const { state, setState } = useApplicationData(id);
+
+  const { state, setState } = useApplicationData(id, 1);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -42,7 +43,7 @@ export default function IndividualPost(props) {
     .filter((comment) => comment.post_id === state.post.id)
     .map((comment) => {
       return (
-        <p>
+        <p key={comment.id}>
           Comment: {comment.content} By User: {comment.user_id}
         </p>
       );
@@ -57,19 +58,12 @@ export default function IndividualPost(props) {
     createComment(comment);
   }
 
-  function LikePost(){
+  function LikePost() {
     const like = {
       user_id: 1,
-      post_id: state.post.id
-    }
-
+      post_id: state.post.id,
+    };
   }
-
-  const position = {
-    lat: Number(state.post.latitude),
-    lng: Number(state.post.longitude),
-  };
-
 
   return (
     <section>
@@ -97,13 +91,12 @@ export default function IndividualPost(props) {
           onLoad={onLoad}
           onUnmount={onUnmount}
         >
-            <MarkerF position={
-              {
-                  lat: Number(state.post.latitude),
-                  lng: Number(state.post.longitude),
-                }
-          }
-               />
+          <MarkerF
+            position={{
+              lat: Number(state.post.latitude),
+              lng: Number(state.post.longitude),
+            }}
+          />
         </GoogleMap>
       ) : (
         <></>
