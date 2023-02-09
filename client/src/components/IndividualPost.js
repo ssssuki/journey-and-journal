@@ -57,10 +57,19 @@ export default function IndividualPost(props) {
     createComment(comment);
   }
 
+  function LikePost(){
+    const like = {
+      user_id: 1,
+      post_id: state.post.id
+    }
+
+  }
+
   const position = {
     lat: Number(state.post.latitude),
     lng: Number(state.post.longitude),
   };
+
 
   return (
     <section>
