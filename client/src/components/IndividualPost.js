@@ -1,11 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import useApplicationData from "../hooks/useApplicationData";
 import { useParams } from "react-router-dom";
 import createComment from "../hooks/createComments";
+import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
+
+const containerStyle = {
+  width: "400px",
+  height: "400px",
+};
+
+const center = {
+  lat: -3.745,
+  lng: -38.523,
+};
 
 export default function IndividualPost(props) {
   let { id } = useParams();
   const { state, setState } = useApplicationData(id);
+
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  });
+
+  const [map, setMap] = useState(null);
+
+  const onLoad = useCallback(function callback(map) {
+    map.setZoom(13);
+    setMap(map);
+  }, []);
+
+  const onUnmount = useCallback(function callback(map) {
+    setMap(null);
+  }, []);
 
   if (state.isLoading) {
     return <div className="App">Loading...</div>;
@@ -30,41 +57,61 @@ export default function IndividualPost(props) {
     createComment(comment);
   }
 
+  const position = {
+    lat: Number(state.post.latitude),
+    lng: Number(state.post.longitude),
+  };
+
   return (
-    <div>
-      {state.isLoading ? (
-        <p>loading</p>
+    <section>
+      <div className="individualPost">
+        <div className="photos">
+          <img src={state.post.photo_link} height="200" />
+        </div>
+        <div className="userid">UserID: {state.post.user_id}</div>
+        <div className="postcontent">
+          Title: {state.post.title} Entry: {state.post.entry}
+        </div>
+        <div className="rating">Rating: {state.post.rating}</div>
+      </div>
+      {isLoaded ? (
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={
+            state.post.longitude && state.post.latitude
+              ? {
+                  lat: Number(state.post.latitude),
+                  lng: Number(state.post.longitude),
+                }
+              : center
+          }
+          onLoad={onLoad}
+          onUnmount={onUnmount}
+        >
+            <MarkerF position={
+              {
+                  lat: Number(state.post.latitude),
+                  lng: Number(state.post.longitude),
+                }
+          }
+               />
+        </GoogleMap>
       ) : (
-        <section>
-          <div className="individualPost">
-            <div className="photos">
-              <img src={state.post.photo_link} height="200" />
-            </div>
-            <div className="userid">UserID: {state.post.user_id}</div>
-            <div className="postcontent">
-              Title: {state.post.title} Entry: {state.post.entry}
-            </div>
-            <div className="rating">Rating: {state.post.rating}</div>
-            <div className="location">
-              Latitude: {state.post.latitude} Longitude: {state.post.longitude}
-            </div>
-            <div className="localty">Locality: {state.post.locality}</div>
-          </div>
-          <div className="comment">{commentList}</div>
-          <form onSubmit={(event) => event.preventDefault()}>
-            <input
-              name="comment"
-              type="text"
-              placeholder="Enter your comments!"
-              value={state.comment}
-              onChange={(event) =>
-                setState({ ...state, comment: event.target.value })
-              }
-            />
-          </form>
-          <button onClick={() => submitComment()}>Comment</button>
-        </section>
+        <></>
       )}
-    </div>
+      <div className="comment">{commentList}</div>
+      <form onSubmit={(event) => event.preventDefault()}>
+        <input
+          name="comment"
+          type="text"
+          placeholder="Enter your comments!"
+          value={state.comment}
+          onChange={(event) =>
+            setState({ ...state, comment: event.target.value })
+          }
+        />
+      </form>
+      <button onClick={() => submitComment()}>Comment</button>
+    </section>
   );
 }
