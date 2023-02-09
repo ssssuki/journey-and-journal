@@ -14,6 +14,8 @@ import MyProfilePage from "./pages/MyProfilePage"
 import reportWebVitals from "./reportWebVitals";
 // import Application from "./components/Application";
 import Posts from "./components/Posts";
+import SearchResults from "./components/SearchResults";
+import IndividualPost from "./components/IndividualPost";
 
 const router = createBrowserRouter([
   {
@@ -29,14 +31,29 @@ const router = createBrowserRouter([
     element: <Posts />,
   },
   {
+    path: "/posts/:id",
+    element: <IndividualPost />,
+  },
+  {
     path: "/user/:id",
     element: <UserPage />
   },
   {
     path: "/myprofile",
     element: <MyProfilePage />
-  }
-
+  },
+  {
+    path: "/posts/:id",
+    element: <IndividualPost />,
+  },
+  {
+    path: "/user",
+    element: <UserPage />,
+  },
+  {
+    path: "/search/",
+    element: <SearchResults />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
