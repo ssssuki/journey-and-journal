@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import SmallPostItem from "../components/SmallPostItem";
+import useUser from "../hooks/useUser"
+import SmallPostItem from '../components/SmallPostItem';
+
 
 export default function HomePage() {
 
   const [posts, setPosts] = useState([]);
+  const { cookies } = useUser();
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_SERVER_API_KEY)
+    axios.get(`http://localhost:8080/api/users/${cookies.session.id}`)
       .then(res => {
         console.log(res.data);
         setPosts(res.data);
@@ -26,9 +29,11 @@ export default function HomePage() {
     );
   });
 
-  return <h1>"I am home page!"
+  return (
     <div>
+      <h1>My user Page</h1>
       {postsArray}
     </div>
-  </h1>;
+    )
+
 }

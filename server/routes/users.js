@@ -14,10 +14,10 @@ module.exports = (db) => {
       LEFT JOIN posts
       ON users.id = user_id 
       WHERE users.id=${request.params.id};
-      `
-    ).then(({ rows: posts }) => {
+      `)
+    .then(({ rows: posts }) => {
       response.json(posts);
     });
-  });
+  })
   return router;
 };

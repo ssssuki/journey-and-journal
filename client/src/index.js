@@ -10,6 +10,7 @@ import "./index.css";
 import HomePage from "./pages/HomePage";
 import CreatePost from "./components/CreatePost";
 import UserPage from "./pages/UserPage";
+import MyProfilePage from "./pages/MyProfilePage"
 import reportWebVitals from "./reportWebVitals";
 // import Application from "./components/Application";
 import Posts from "./components/Posts";
@@ -28,6 +29,18 @@ const router = createBrowserRouter([
   {
     path: "/posts",
     element: <Posts />,
+  },
+  {
+    path: "/posts/:id",
+    element: <IndividualPost />,
+  },
+  {
+    path: "/user/:id",
+    element: <UserPage />
+  },
+  {
+    path: "/myprofile",
+    element: <MyProfilePage />
   },
   {
     path: "/posts/:id",
