@@ -16,7 +16,8 @@ const center = {
 
 export default function IndividualPost(props) {
   let { id } = useParams();
-  const { state, setState } = useApplicationData(id);
+
+  const { state, setState } = useApplicationData(id, 1);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -64,12 +65,6 @@ export default function IndividualPost(props) {
     }
 
   }
-
-  const position = {
-    lat: Number(state.post.latitude),
-    lng: Number(state.post.longitude),
-  };
-
 
   return (
     <section>
