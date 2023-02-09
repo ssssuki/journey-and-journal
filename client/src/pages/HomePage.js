@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import SmallPostItem from "../components/SmallPostItem";
 import Navbar from '../components/Navbar';
+import "../styles/SmallPostItem.scss"
 
 export default function HomePage() {
 
@@ -30,7 +31,11 @@ export default function HomePage() {
   return (
     <main>
       <Navbar />
-      {postsArray}
+      <div class="container">
+        <div class="row row-cols-4">
+         {postsArray}
+        </div>
+      </div>
     </main>
   )
 }
