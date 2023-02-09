@@ -6,8 +6,8 @@
   justify-content: space-between;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: grey;
-  border-bottom: 2px rgb(0, 0, 0) solid;
+  background-color: rgb(244, 244, 244);
+  border-bottom: 2px rgb(223, 223, 223) solid;
 }
 
 .nav-bar-item {
@@ -17,6 +17,10 @@
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.nav-bar-item > img {
+  height: 3em;
 }
 
 .btn {

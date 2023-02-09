@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useUser from "../hooks/useUser";
 import "../styles/navbar.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -80,7 +80,12 @@ export default function Navbar() {
   return (
     <div className="nav-bar">
       <div className="nav-bar-item">
-        <h1 onClick={() => navigate("/")}>Logo</h1>
+        <img
+          onClick={() => navigate("/")}
+          alt="logo"
+          src="../images/jnj-logo.png"
+          >
+        </img>
       </div>
       <div className="nav-bar-item">
         <PlacesAutocomplete />
@@ -98,6 +103,11 @@ export default function Navbar() {
         ) : (
           <>
             <span>Logged in as {cookies.session.username}</span>
+            <button className="btn btn-secondary">
+              <Link to={`/create`}>
+              +
+              </Link>
+            </button>
             <button className="btn btn-secondary" onClick={() => logout()}>
               Logout
             </button>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import SmallPostItem from "../components/SmallPostItem";
+import Navbar from '../components/Navbar';
 
 export default function HomePage() {
 
@@ -26,9 +27,10 @@ export default function HomePage() {
     );
   });
 
-  return <h1>"I am home page!"
-    <div>
+  return (
+    <main>
+      <Navbar />
       {postsArray}
-    </div>
-  </h1>;
+    </main>
+  )
 }
