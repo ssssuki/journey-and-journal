@@ -139,7 +139,7 @@ export default function CreatePost() {
 
   return (
     <div>
-      <NavigationBar></NavigationBar>
+      <Navbar></Navbar>
       <PlacesAutocomplete />
       {isLoaded ? (
         <GoogleMap

@@ -1,17 +1,5 @@
 import React, { useState } from "react";
 import useUser from "../hooks/useUser";
-<<<<<<< HEAD:client/src/components/NavigationBar.js
-import  Navbar from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container"
-import "bootstrap/dist/css/bootstrap.min.css"
-import "../styles/NavigationBar.scss"
-// import { useCookies } from "react-cookie";
-// import setUser from "../hooks/setUser";
-
-export default function NavigationBar(props) {
-  const [search, setSearch] = useState("");
-  // const [cookies, setCookie, removeCookie] = useCookies(["session"]);
-=======
 import "../styles/navbar.scss";
 import { useNavigate } from "react-router-dom";
 import usePlacesAutocomplete, {
@@ -19,7 +7,6 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
->>>>>>> e25964be074b9a9fa3b5d8b2ed37af3ac03563ef:client/src/components/Navbar.js
 
 export default function Navbar() {
   const { login, logout, cookies } = useUser();
@@ -42,16 +29,6 @@ export default function Navbar() {
       clearSuggestions();
     });
 
-<<<<<<< HEAD:client/src/components/NavigationBar.js
-  return (
-    <>
-      <Navbar bg="light" expand="lg" variant="dark">
-        <Container>
-      <img
-        alt="logo">
-      </img>
-      <form onSubmit={(event) => event.preventDefault()}>
-=======
     const handleInput = (e) => {
       setValue(e.target.value);
     };
@@ -88,7 +65,6 @@ export default function Navbar() {
 
     return (
       <div ref={ref}>
->>>>>>> e25964be074b9a9fa3b5d8b2ed37af3ac03563ef:client/src/components/Navbar.js
         <input
           className="search-bar"
           value={value}
@@ -96,24 +72,6 @@ export default function Navbar() {
           disabled={!ready}
           placeholder="Search by Location!"
         />
-<<<<<<< HEAD:client/src/components/NavigationBar.js
-      </form>
-      <button onClick={() => handleSearch(search)}>Go!</button>
-      {!cookies.session ? (
-        <>
-          <button onClick={() => login(2)}>Login As Bob</button>
-          <button onClick={() => login(3)}>Login As Jessie</button>
-        </>
-      ) : (
-        <>
-          <span>Logged in as {cookies.session.username}</span>
-          <button onClick={() => logout()}>Logout</button>
-        </>
-      )}
-      </Container>
-      </Navbar>
-    </>
-=======
         {status === "OK" && <ul>{renderSuggestions()}</ul>}
       </div>
     );
@@ -147,6 +105,5 @@ export default function Navbar() {
         )}
       </div>
     </div>
->>>>>>> e25964be074b9a9fa3b5d8b2ed37af3ac03563ef:client/src/components/Navbar.js
   );
 }
