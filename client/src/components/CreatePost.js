@@ -1,11 +1,6 @@
 import React, { useState, useCallback } from "react";
 import "../styles/createPost.scss";
-import {
-  GoogleMap,
-  useJsApiLoader,
-  // Marker,
-  // InfoWindow,
-} from "@react-google-maps/api";
+import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -15,6 +10,7 @@ import useOnclickOutside from "react-cool-onclickoutside";
 import createPost from "../hooks/createPost";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import useUser from "../hooks/useUser";
 
 const containerStyle = {
   width: "33vw",
@@ -35,6 +31,8 @@ export default function CreatePost() {
     entry: "",
     rating: 0,
   });
+
+  const { cookies } = useUser();
 
   const navigate = useNavigate();
 
@@ -122,115 +120,141 @@ export default function CreatePost() {
 
   function submitPost() {
     const data = {
-      user_id: 1,
+      user_id: cookies.session.id,
       title: state.title,
       entry: state.entry,
-      rating: 4,
+      rating: state.rating,
       photo_link: state.picture_url,
       latitude: state.latitude,
       longitude: state.longitude,
       address: state.address,
     };
 
-    createPost(data);
-    navigate("/");
+    if (
+      state.title &&
+      state.entry &&
+      state.rating &&
+      state.picture_url &&
+      state.latitude &&
+      state.longitude &&
+      state.address &&
+      cookies.session.id
+    ) {
+      createPost(data);
+      navigate("/");
+    } else {
+      alert("Please fill in all fields");
+    }
   }
 
   return (
-    <div>
-      <PlacesAutocomplete />
-      {isLoaded ? (
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={
-            state.longitude && state.latitude
-              ? { lat: state.latitude, lng: state.longitude }
-              : center
-          }
-          onLoad={onLoad}
-          onUnmount={onUnmount}
+    <div className="create-page">
+      <div className="create-map">
+        <PlacesAutocomplete />
+        {isLoaded ? (
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={
+              state.longitude && state.latitude
+                ? { lat: state.latitude, lng: state.longitude }
+                : center
+            }
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+          >
+            <MarkerF
+              position={{
+                lat: Number(state.latitude),
+                lng: Number(state.longitude),
+              }}
+            />
+          </GoogleMap>
+        ) : (
+          <></>
+        )}
+      </div>
+      <div className="create-right">
+        <form
+          className="create-form"
+          onSubmit={(event) => event.preventDefault()}
         >
-          {/* {state.longitude && state.latitude ? (
-            <Marker lat={state.latitude} lng={state.longitude} />
-          ) : (
-            <></>
-          )} */}
-        </GoogleMap>
-      ) : (
-        <></>
-      )}
-      <form onSubmit={(event) => event.preventDefault()}>
-        <input
-          name="title"
-          type="text"
-          placeholder="Title"
-          value={state.title}
-          onChange={(event) =>
-            setState({ ...state, title: event.target.value })
-          }
-        />
-        <input
-          name="picture_url"
-          type="text"
-          placeholder="Picture"
-          value={state.picture_url}
-          onChange={(event) =>
-            setState({ ...state, picture_url: event.target.value })
-          }
-        />
-        <input
-          name="entry"
-          type="text"
-          placeholder="Journal Entry"
-          value={state.entry}
-          onChange={(event) =>
-            setState({ ...state, entry: event.target.value })
-          }
-        />
-      </form>
-      <h3>
-        <span style={state.rating >= 1 ? { color: "gold" } : {}}>
-          <FontAwesomeIcon
-            icon={faStar}
-            onClick={() => {
-              setState({ ...state, rating: 1 });
-            }}
+          <input
+            className="create-title"
+            name="title"
+            type="text"
+            placeholder="Title"
+            value={state.title}
+            onChange={(event) =>
+              setState({ ...state, title: event.target.value })
+            }
           />
-        </span>
-        <span style={state.rating >= 2 ? { color: "gold" } : {}}>
-          <FontAwesomeIcon
-            icon={faStar}
-            onClick={() => {
-              setState({ ...state, rating: 2 });
-            }}
+          <input
+            className="create-title"
+            name="picture_url"
+            type="text"
+            placeholder="Picture"
+            value={state.picture_url}
+            onChange={(event) =>
+              setState({ ...state, picture_url: event.target.value })
+            }
           />
-        </span>
-        <span style={state.rating >= 3 ? { color: "gold" } : {}}>
-          <FontAwesomeIcon
-            icon={faStar}
-            onClick={() => {
-              setState({ ...state, rating: 3 });
-            }}
-          />
-        </span>
-        <span style={state.rating >= 4 ? { color: "gold" } : {}}>
-          <FontAwesomeIcon
-            icon={faStar}
-            onClick={() => {
-              setState({ ...state, rating: 4 });
-            }}
-          />
-        </span>
-        <span style={state.rating >= 5 ? { color: "gold" } : {}}>
-          <FontAwesomeIcon
-            icon={faStar}
-            onClick={() => {
-              setState({ ...state, rating: 5 });
-            }}
-          />
-        </span>
-      </h3>
-      <button onClick={() => submitPost()}>Post</button>
+          <textarea
+            className="create-entry"
+            name="entry"
+            type="text"
+            placeholder="Journal Entry"
+            value={state.entry}
+            onChange={(event) =>
+              setState({ ...state, entry: event.target.value })
+            }
+          ></textarea>
+        </form>
+        <h3>
+          <span style={state.rating >= 1 ? { color: "gold" } : {}}>
+            <FontAwesomeIcon
+              icon={faStar}
+              onClick={() => {
+                setState({ ...state, rating: 1 });
+              }}
+            />
+          </span>
+          <span style={state.rating >= 2 ? { color: "gold" } : {}}>
+            <FontAwesomeIcon
+              icon={faStar}
+              onClick={() => {
+                setState({ ...state, rating: 2 });
+              }}
+            />
+          </span>
+          <span style={state.rating >= 3 ? { color: "gold" } : {}}>
+            <FontAwesomeIcon
+              icon={faStar}
+              onClick={() => {
+                setState({ ...state, rating: 3 });
+              }}
+            />
+          </span>
+          <span style={state.rating >= 4 ? { color: "gold" } : {}}>
+            <FontAwesomeIcon
+              icon={faStar}
+              onClick={() => {
+                setState({ ...state, rating: 4 });
+              }}
+            />
+          </span>
+          <span style={state.rating >= 5 ? { color: "gold" } : {}}>
+            <FontAwesomeIcon
+              icon={faStar}
+              onClick={() => {
+                setState({ ...state, rating: 5 });
+              }}
+            />
+          </span>
+        </h3>
+        <button className="btn btn-success" onClick={() => submitPost()}>
+          Post
+        </button>
+      </div>
     </div>
   );
 }
