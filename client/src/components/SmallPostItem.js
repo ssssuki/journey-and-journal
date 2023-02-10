@@ -6,11 +6,17 @@ export default function SmallPostItem(props) {
     <div>
       <Link to={`/posts/${props.id}`}>
         <article>
-          <h3>{props.title}</h3>
-          <img
-            src={props.photo}
-          />
-          <p>{props.address}</p>
+            <span>{props.title}</span>
+            <div className="city-card">
+              <figure>
+              <img
+                className="child"
+                alt="entry-photo"
+                src={props.photo}
+              />
+            <figcaption>{props.address}</figcaption>
+            </figure>
+            </div>
         </article>
       </Link>
     </div>
