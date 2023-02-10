@@ -8,10 +8,12 @@ export default function useApplicationData(post_id, user_id) {
     post:null,
     comment: null,
     like: null,
+    likeCount: 0,
     posts: {},
     comments:{},
     likes: {},
-    isLoading:true
+    isLoading:true,
+    isClicked: false
   });
 
   useEffect(() => {
@@ -31,15 +33,14 @@ export default function useApplicationData(post_id, user_id) {
       Promise.all([
         axios.get(`http://localhost:8080/api/posts/${post_id}`),
         axios.get(`http://localhost:8080/api/comments/${post_id}`),
-        axios.get(`http://localhost:8080/api/likes/${user_id}`),
-        axios.get("http://localhost:8080/api/likes")
+        axios.get(`http://localhost:8080/api/likes/${post_id}`)
       ]).then((all) => {
         setState((prev) => ({
           ...prev,
           post: all[0].data[0],
           comments: all[1].data,
-          like: all[2].data[0],
-          likes: all[3].data,
+          likes: all[2].data,
+          likeCount: all[2].data.length,
           isLoading: false
         }));
       });

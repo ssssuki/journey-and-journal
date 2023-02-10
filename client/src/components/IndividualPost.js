@@ -50,11 +50,10 @@ export default function IndividualPost(props) {
       );
     });
 
-    const likesList = state.likes.filter((like) => like.user_id === 1)
-    .map((user) => {
+    const likesList = state.likes.map((like) => {
       return (
         <p>
-          Likes: Liked By User: {state.like.user_id}
+          Likes: Liked By User: {like.user_id}
         </p>
       );
     });
@@ -73,9 +72,17 @@ export default function IndividualPost(props) {
       user_id: 1,
       post_id: state.post.id
     }
-    console.log(like)
     createLikes(like);
   }
+
+  const handleClick = () => {
+    if (state.isClicked) {
+      setState({ ...state, likeCount: state.likeCount - 1});
+    } else {
+      setState({ ...state, likeCount: state.likeCount + 1});
+    }
+    setState({ ...state, isClicked: !state.isClicked});
+  };
 
   return (
     <section>
@@ -130,6 +137,10 @@ export default function IndividualPost(props) {
       </form>
       <button onClick={() => submitComment()}>comment</button>
       <button onClick={() => LikePost()}>like</button>
+
+      <button className={ `like-button` } onClick={ handleClick }>
+      <span className="likes-counter">{ `LikeCount | ${state.likeCount}` }</span>
+    </button>
     </section>
   );
 }
