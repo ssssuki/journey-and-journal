@@ -3,6 +3,7 @@ import useApplicationData from "../hooks/useApplicationData";
 import { useParams } from "react-router-dom";
 import createComment from "../hooks/createComments";
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
+import createLikes from "../hooks/CreateLikes"; 
 
 const containerStyle = {
   width: "400px",
@@ -49,6 +50,15 @@ export default function IndividualPost(props) {
       );
     });
 
+    const likesList = state.likes.filter((like) => like.user_id === 1)
+    .map((user) => {
+      return (
+        <p>
+          Likes: Liked By User: {state.like.user_id}
+        </p>
+      );
+    });
+
   function submitComment() {
     const comment = {
       user_id: 1,
@@ -63,7 +73,8 @@ export default function IndividualPost(props) {
       user_id: 1,
       post_id: state.post.id
     }
-
+    console.log(like)
+    createLikes(like);
   }
 
   return (
@@ -77,6 +88,8 @@ export default function IndividualPost(props) {
           Title: {state.post.title} Entry: {state.post.entry}
         </div>
         <div className="rating">Rating: {state.post.rating}</div>
+        <div className="likes"> {likesList}</div>
+
       </div>
       {isLoaded ? (
         <GoogleMap
@@ -115,7 +128,8 @@ export default function IndividualPost(props) {
           }
         />
       </form>
-      <button onClick={() => submitComment()}>Comment</button>
+      <button onClick={() => submitComment()}>comment</button>
+      <button onClick={() => LikePost()}>like</button>
     </section>
   );
 }

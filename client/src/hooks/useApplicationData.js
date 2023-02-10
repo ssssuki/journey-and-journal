@@ -18,14 +18,12 @@ export default function useApplicationData(post_id, user_id) {
     if(post_id === undefined){
       Promise.all([
         axios.get("http://localhost:8080/api/posts"),
-        axios.get("http://localhost:8080/api/comments"),
-        axios.get("http://localhost:8080/api/likes")
+        axios.get("http://localhost:8080/api/comments")
       ]).then((all) => {
         setState((prev) => ({
           ...prev,
           posts: all[0].data,
           comments: all[1].data,
-          likes: all[2].data,
           isLoading: false
         }));
       });
@@ -33,13 +31,15 @@ export default function useApplicationData(post_id, user_id) {
       Promise.all([
         axios.get(`http://localhost:8080/api/posts/${post_id}`),
         axios.get(`http://localhost:8080/api/comments/${post_id}`),
-        axios.get(`http://localhost:8080/api/likes/${user_id}`)
+        axios.get(`http://localhost:8080/api/likes/${user_id}`),
+        axios.get("http://localhost:8080/api/likes")
       ]).then((all) => {
         setState((prev) => ({
           ...prev,
           post: all[0].data[0],
           comments: all[1].data,
-          like: all[2].data,
+          like: all[2].data[0],
+          likes: all[3].data,
           isLoading: false
         }));
       });
