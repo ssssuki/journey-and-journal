@@ -7,7 +7,7 @@ module.exports = (db) => {
     });
   });
   router.get("/likes/:id", (request, response) => {
-    db.query(`SELECT * FROM likes WHERE user_id=${request.params.id}`).then(({ rows: likes }) => {
+    db.query(`SELECT * FROM likes WHERE post_id=${request.params.id}`).then(({ rows: likes }) => {
       response.json(likes);
     });
   });

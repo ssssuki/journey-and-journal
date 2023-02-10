@@ -3,6 +3,7 @@ import useApplicationData from "../hooks/useApplicationData";
 import { useParams } from "react-router-dom";
 import createComment from "../hooks/createComments";
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
+import createLikes from "../hooks/CreateLikes";
 
 const containerStyle = {
   width: "400px",
@@ -49,6 +50,10 @@ export default function IndividualPost(props) {
       );
     });
 
+  const likesList = state.likes.map((like) => {
+    return <p>Likes: Liked By User: {like.user_id}</p>;
+  });
+
   function submitComment() {
     const comment = {
       user_id: 1,
@@ -63,7 +68,17 @@ export default function IndividualPost(props) {
       user_id: 1,
       post_id: state.post.id,
     };
+    createLikes(like);
   }
+
+  const handleClick = () => {
+    if (state.isClicked) {
+      setState({ ...state, likeCount: state.likeCount - 1 });
+    } else {
+      setState({ ...state, likeCount: state.likeCount + 1 });
+    }
+    setState({ ...state, isClicked: !state.isClicked });
+  };
 
   return (
     <section>
@@ -76,6 +91,7 @@ export default function IndividualPost(props) {
           Title: {state.post.title} Entry: {state.post.entry}
         </div>
         <div className="rating">Rating: {state.post.rating}</div>
+        <div className="likes"> {likesList}</div>
       </div>
       {isLoaded ? (
         <GoogleMap
@@ -113,7 +129,12 @@ export default function IndividualPost(props) {
           }
         />
       </form>
-      <button onClick={() => submitComment()}>Comment</button>
+      <button onClick={() => submitComment()}>comment</button>
+      <button onClick={() => LikePost()}>like</button>
+
+      <button className={`like-button`} onClick={handleClick}>
+        <span className="likes-counter">{`LikeCount | ${state.likeCount}`}</span>
+      </button>
     </section>
   );
 }
