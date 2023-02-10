@@ -1,39 +1,66 @@
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
-.col > img {
-  object-fit: fill; /* Do not scale the image */
-  object-position: center; /* Center the image within the element */
-  width: 100%;
-  height: 250px;
-  margin-bottom: 1rem;
-  border-radius: 30px;
-  transition: all .5s;
-}
 
-.parent:hover .col > img,
-.parent:focus .col > img {
-  transform: scale(1.2);
-}
 
-.col > img::before {
-  content: "";
-  display: none;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(52, 73, 94, 0.75);
-}
-
-.parent:hover .col > img:before,
-.parent:focus .col > img:before {
-  display: block;
-}
-
-span {
-  color: white;
-  font-family: sans-serif;
-  padding: 25%;
-  position: absolute;
+.city-card {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  
+  figure {
+    position: relative;
+    margin: 0;
+    padding-top: 45%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 20px;
+    
+    &::before {
+      content: '';
+      display: none;
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #5b5d6a85;
+      border-radius: 20px;
+    }
+  }
+  
+  img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    transition: all .5s;
+  }
+  
+  figcaption {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    transform: translate(-50%, -50%);
+    font: 2rem sans-serif;
+    color: #fff;
+  }
+  
+  &:hover {
+    figure::before {
+      display: block;
+    }
+    
+    img {
+      transform: scale(1.2);
+    }
+    
+    figcaption {
+      display: block;
+    }
+  }
 }
