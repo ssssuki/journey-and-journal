@@ -104,7 +104,9 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <span>Logged in as {cookies.session.username}</span>
+            <span className="welcome-msg">
+              Logged in as {cookies.session.username}
+            </span>
             <button className="btn btn-secondary">
               <Link to={`/create`}>+</Link>
             </button>

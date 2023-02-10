@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import "../styles/createPost.scss";
 import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 import usePlacesAutocomplete, {
@@ -154,10 +154,18 @@ export default function CreatePost() {
     }
   }
 
+  const textRef = useRef();
+  useEffect(() => {
+    if (textRef && textRef.current) {
+      textRef.current.style.height = "0px";
+      const taHeight = textRef.current.scrollHeight;
+      textRef.current.style.height = taHeight + "px";
+    }
+  });
+
   return (
     <div className="create-page">
       <div className="create-map">
-        <PlacesAutocomplete />
         {isLoaded ? (
           <GoogleMap
             mapContainerStyle={containerStyle}
@@ -179,6 +187,7 @@ export default function CreatePost() {
         ) : (
           <></>
         )}
+        <PlacesAutocomplete />
       </div>
       <div className="create-right">
         <form
@@ -207,6 +216,7 @@ export default function CreatePost() {
           />
           <textarea
             className="create-entry"
+            ref={textRef}
             name="entry"
             type="text"
             placeholder="Journal Entry"

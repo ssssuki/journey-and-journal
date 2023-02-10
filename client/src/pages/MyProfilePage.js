@@ -1,25 +1,59 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import useUser from "../hooks/useUser"
-import SmallPostItem from '../components/SmallPostItem';
-
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import useUser from "../hooks/useUser";
+import SmallPostItem from "../components/SmallPostItem";
+import Navbar from "../components/Navbar";
 
 export default function HomePage() {
-
-  const [posts, setPosts] = useState([]);
   const { cookies } = useUser();
+  const [state, setState] = useState({
+    ownPosts: [],
+    likedPosts: [],
+    showing: "own",
+    user: cookies.session,
+  });
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/users/${cookies.session.id}`)
-      .then(res => {
-        console.log(res.data);
-        setPosts(res.data);
-      });
+    if (!cookies.session) {
+      navigate("/");
+    }
+    Promise.all([
+      axios.get(`http://localhost:8080/api/users/${cookies.session.id}`),
+      axios.get(
+        `http://localhost:8080/api/likes/by-user/${cookies.session.id}`
+      ),
+    ]).then((all) => {
+      setState((prev) => ({
+        ...prev,
+        ownPosts: all[0].data,
+        likedPosts: all[1].data,
+      }));
+    });
   }, []);
 
-  const postsArray = posts.map(post => {
+  useEffect(() => {
+    if (!cookies.session) {
+      navigate("/");
+    }
+  }, [cookies.session]);
+
+  const ownPostsArray = state.ownPosts.map((post) => {
     return (
-      < SmallPostItem
+      <SmallPostItem
+        key={post.id}
+        id={post.id}
+        title={post.title}
+        photo={post.photo_link}
+        address={post.address}
+      />
+    );
+  });
+
+  const likedPostsArray = state.likedPosts.map((post) => {
+    return (
+      <SmallPostItem
         key={post.id}
         id={post.id}
         title={post.title}
@@ -31,9 +65,24 @@ export default function HomePage() {
 
   return (
     <div>
+      <Navbar />
       <h1>My user Page</h1>
-      {postsArray}
+      <h3
+        onClick={() => {
+          setState((prev) => ({ ...prev, showing: "own" }));
+        }}
+      >
+        My Posts
+      </h3>
+      <h3
+        onClick={() => {
+          setState((prev) => ({ ...prev, showing: "liked" }));
+        }}
+      >
+        Liked Posts
+      </h3>
+      {state.showing === "own" && ownPostsArray}
+      {state.showing === "liked" && likedPostsArray}
     </div>
-    )
-
+  );
 }
