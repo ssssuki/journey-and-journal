@@ -104,7 +104,10 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <span className="welcome-msg">
+            <span
+              className="welcome-msg"
+              onClick={() => navigate("/myprofile")}
+            >
               Logged in as {cookies.session.username}
             </span>
             <button className="btn btn-secondary">
