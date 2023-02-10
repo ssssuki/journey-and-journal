@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import SmallPostItem from "../components/SmallPostItem";
 import Navbar from '../components/Navbar';
-import "../styles/SmallPostItem.scss"
+import "../styles/SmallPostItem.scss";
+import { Parallax, ParallaxLayer } from '@react-spring/parallax'
+import "../styles/HomePage.scss";
 
 export default function HomePage() {
 
@@ -28,14 +30,33 @@ export default function HomePage() {
     );
   });
 
+
+
   return (
     <main>
+
+      <Parallax pages={2.5}>
+        <ParallaxLayer>
       <Navbar />
-      <div class="container">
-        <div class="row row-cols-4">
-         {postsArray}
+        </ParallaxLayer>
+      <ParallaxLayer speed={2.5}>
+        <p>Parallax</p>
+      </ParallaxLayer>
+      <ParallaxLayer speed={0.5} factor={2}>
+        <img className='parallax' src="../images/parallax_1.png" />
+      </ParallaxLayer>
+      <ParallaxLayer speed={1.5} >
+        <img className='parallax' src="../images/parallax_3.png" />
+      </ParallaxLayer>
+      <ParallaxLayer speed={0.5} offset={1}>
+      <div className="container">
+        <div className="row row-cols-4">
+          {postsArray}
         </div>
       </div>
+      </ParallaxLayer>
+    </Parallax>
+
     </main>
-  )
+  );
 }
