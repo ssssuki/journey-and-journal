@@ -54,7 +54,8 @@ export default function Navbar() {
 
         return (
           <li
-            className="search-suggestion"
+            className="search-suggestions-items"
+            style={{ zIndex: 2 }}
             key={place_id}
             onClick={handleSelect(suggestion)}
           >
@@ -72,7 +73,9 @@ export default function Navbar() {
           disabled={!ready}
           placeholder="Search by Location!"
         />
-        {status === "OK" && <ul>{renderSuggestions()}</ul>}
+        {status === "OK" && (
+          <ul className="search-suggestions">{renderSuggestions()}</ul>
+        )}
       </div>
     );
   };
@@ -84,8 +87,7 @@ export default function Navbar() {
           onClick={() => navigate("/")}
           alt="logo"
           src="../images/jnj-logo.png"
-          >
-        </img>
+        ></img>
       </div>
       <div className="nav-bar-item">
         <PlacesAutocomplete />
@@ -104,9 +106,7 @@ export default function Navbar() {
           <>
             <span>Logged in as {cookies.session.username}</span>
             <button className="btn btn-secondary">
-              <Link to={`/create`}>
-              +
-              </Link>
+              <Link to={`/create`}>+</Link>
             </button>
             <button className="btn btn-secondary" onClick={() => logout()}>
               Logout

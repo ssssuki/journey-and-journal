@@ -83,7 +83,11 @@ export default function CreatePost() {
         } = suggestion;
 
         return (
-          <li key={place_id} onClick={handleSelect(suggestion)}>
+          <li
+            className="search-suggestions-items"
+            key={place_id}
+            onClick={handleSelect(suggestion)}
+          >
             <strong>{main_text}</strong> <small>{secondary_text}</small>
           </li>
         );
@@ -92,12 +96,15 @@ export default function CreatePost() {
     return (
       <div ref={ref}>
         <input
+          className="search-bar"
           value={value}
           onChange={handleInput}
           disabled={!ready}
           placeholder="Where did you go?"
         />
-        {status === "OK" && <ul>{renderSuggestions()}</ul>}
+        {status === "OK" && (
+          <ul className="search-suggestions">{renderSuggestions()}</ul>
+        )}
       </div>
     );
   };
