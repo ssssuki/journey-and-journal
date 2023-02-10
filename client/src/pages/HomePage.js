@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import SmallPostItem from "../components/SmallPostItem";
 import Navbar from '../components/Navbar';
-import "../styles/SmallPostItem.scss";
-import { Parallax, ParallaxLayer } from '@react-spring/parallax'
+import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import "../styles/HomePage.scss";
+import SmallPostItem from "../components/SmallPostItem";
+import "../styles/SmallPostItem.scss";
 
 export default function HomePage() {
 
@@ -35,27 +35,41 @@ export default function HomePage() {
   return (
     <main>
 
-      <Parallax pages={2.5}>
-        <ParallaxLayer>
-      <Navbar />
+      <Parallax pages={3}>
+        <ParallaxLayer
+          speed={0.8}
+          style={{
+            backgroundImage: "url(../images/parallax_1.png)",
+            backgroundSize: 'cover',
+          }}>
         </ParallaxLayer>
-      <ParallaxLayer speed={2.5}>
-        <p>Parallax</p>
-      </ParallaxLayer>
-      <ParallaxLayer speed={0.5} factor={2}>
-        <img className='parallax' src="../images/parallax_1.png" />
-      </ParallaxLayer>
-      <ParallaxLayer speed={1.5} >
-        <img className='parallax' src="../images/parallax_3.png" />
-      </ParallaxLayer>
-      <ParallaxLayer speed={0.5} offset={1}>
-      <div className="container">
-        <div className="row row-cols-4">
-          {postsArray}
-        </div>
-      </div>
-      </ParallaxLayer>
-    </Parallax>
+        <ParallaxLayer speed={0.4}
+          style={{
+            backgroundImage: "url(../images/parallax_3.png)",
+            backgroundSize: 'cover',
+          }}>
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={0.5}
+          speed={0.2}
+          style={{textAlign: 'center'}}>
+          <h1>A new adventure awaits</h1>
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={0}
+          sticky={{ start: 0 , end: 0.1 }}>
+          <Navbar />
+        </ParallaxLayer>
+        <ParallaxLayer
+          speed={0.5}
+          offset={1}>
+          <div className="container">
+            <div className="row row-cols-4">
+              {postsArray}
+            </div>
+          </div>
+        </ParallaxLayer>
+      </Parallax>
 
     </main>
   );
