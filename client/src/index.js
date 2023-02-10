@@ -6,7 +6,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
-import "./index.css";
+import "./index.scss";
 import HomePage from "./pages/HomePage";
 import CreatePage from "./pages/CreatePage";
 import UserPage from "./pages/UserPage";

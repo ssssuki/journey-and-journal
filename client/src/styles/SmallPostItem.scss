@@ -1,0 +1,66 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+
+
+.city-card {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  
+  figure {
+    position: relative;
+    margin: 0;
+    padding-top: 45%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 20px;
+    
+    &::before {
+      content: '';
+      display: none;
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #5b5d6a85;
+      border-radius: 20px;
+    }
+  }
+  
+  img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    transition: all .5s;
+  }
+  
+  figcaption {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    transform: translate(-50%, -50%);
+    font: 2rem sans-serif;
+    color: #fff;
+  }
+  
+  &:hover {
+    figure::before {
+      display: block;
+    }
+    
+    img {
+      transform: scale(1.2);
+    }
+    
+    figcaption {
+      display: block;
+    }
+  }
+}
