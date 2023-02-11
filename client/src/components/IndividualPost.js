@@ -60,7 +60,7 @@ export default function IndividualPost(props) {
 
   function submitComment() {
     const comment = {
-      user_id: 1,
+      user_id: state.user_id,
       post_id: state.post.id,
       content: state.comment,
     };
@@ -69,7 +69,7 @@ export default function IndividualPost(props) {
 
   function LikePost(){
     const like = {
-      user_id: 1,
+      user_id: state.user_id,
       post_id: state.post.id
     }
     createLikes(like);
