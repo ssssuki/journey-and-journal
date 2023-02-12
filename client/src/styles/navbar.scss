@@ -30,8 +30,12 @@
 
 .search-bar {
   display: block;
-  width: 300px;
+  width: 400px;
+  height: 2.5em;
+  border: 3px solid grey;
+  border-radius: 10px;
 }
+
 .search-suggestions {
   position: absolute;
   z-index: 1000;
