@@ -110,8 +110,11 @@ export default function Navbar() {
             >
               Logged in as {cookies.session.username}
             </span>
-            <button className="btn btn-outline-light">
-              <Link to={`/create`}>+</Link>
+            <button className="btn btn-outline-light" onClick={() => navigate("/create")}>
+                +
+            </button>
+            <button className="btn btn-outline-light" onClick={() => navigate("/myprofile")}>
+                My Profile
             </button>
             <button className="btn btn-outline-light" onClick={() => logout()}>
               Logout

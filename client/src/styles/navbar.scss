@@ -43,11 +43,16 @@
   background: transparent;
   border: none;
   border-bottom: 2px solid #efefef;
-
+  color: white;
 }
 
 .search-bar::placeholder {
   color: rgba(255, 255, 255, 0.818);
+}
+
+.search-bar:focus {
+  outline: none;
+  border:1px solid rgb(188, 188, 188);
 }
 
 .search-suggestions {
