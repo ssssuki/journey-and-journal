@@ -28,10 +28,28 @@
   margin: 3px;
 }
 
+.btn-outline-light {
+  border-color: rgb(87, 87, 87) !important;
+  color: rgb(255, 255, 255, 0.818) !important;
+}
+
+.btn-outline-light:hover {
+  background-color: rgba(68, 68, 68, 0.501) !important;
+}
+
 .search-bar {
   display: block;
   width: 300px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #efefef;
+
 }
+
+.search-bar::placeholder {
+  color: rgba(255, 255, 255, 0.818);
+}
+
 .search-suggestions {
   position: absolute;
   z-index: 1000;

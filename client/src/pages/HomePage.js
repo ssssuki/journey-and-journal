@@ -51,7 +51,7 @@ export default function HomePage() {
         </ParallaxLayer>
         <ParallaxLayer
           offset={0.5}
-          speed={0.2}
+          speed={0.1}
           style={{textAlign: 'center'}}>
           <h1>A new adventure awaits</h1>
         </ParallaxLayer>
