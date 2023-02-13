@@ -1,7 +1,5 @@
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
-
-
 .city-card {
   padding-top: 1em;
   padding-bottom: 1em;
@@ -23,7 +21,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: #5b5d6a85;
+      background-color: #4242426c;
       border-radius: 20px;
     }
   }
@@ -37,17 +35,28 @@
     width: 100%;
     min-height: 100%;
     transition: all .5s;
+    box-shadow: 2px 2px 4px #000000;
   }
   
+
   figcaption {
-    display: none;
     position: absolute;
-    top: 50%;
     left: 50%;
     z-index: 3;
     transform: translate(-50%, -50%);
-    font: 2rem sans-serif;
     color: #fff;
+  }
+
+  #title {
+    top: 50%;
+    font-size: 1.75em;
+    text-align: center;
+    text-shadow: 2px 2px 2px #434343;
+  }
+
+  #city {
+    top: 90%;
+    font-size: 0.75em;
   }
   
   &:hover {

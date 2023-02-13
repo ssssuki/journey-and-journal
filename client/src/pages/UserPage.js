@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import SmallPostItem from '../components/SmallPostItem';
+import "../styles/UserPage.scss"
 
 
-export default function HomePage() {
+export default function UserPage() {
 
   const [posts, setUser] = useState([]);
   const userID = useParams().id;

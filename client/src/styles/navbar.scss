@@ -6,8 +6,12 @@
   justify-content: space-between;
   padding: 10px;
   margin-bottom: 10px;
-  // background-color: rgb(244, 244, 244);
+  background-color: rgb(27, 27, 27);
   // border-bottom: 2px rgb(223, 223, 223) solid;
+}
+
+#navbar-home-style > .nav-bar  {
+  background: none;
 }
 
 .nav-bar-item {
@@ -34,7 +38,7 @@
 }
 
 .btn-outline-light:hover {
-  background-color: rgba(68, 68, 68, 0.501) !important;
+  background-color: rgba(67, 67, 67, 0.501) !important;
 }
 
 .search-bar {
