@@ -68,21 +68,23 @@ export default function MyProfilePage() {
   return (
     <div>
       <Navbar />
-      <h1>My user page</h1>
+      <h3 className="title">My user page</h3>
+      <div className="divider">
       <button
-        className="btn btn-outline-dark"
+        className="btn"
         onClick={() => {
           setState((prev) => ({ ...prev, showing: "own" }));
         }}>
         MY POSTS
       </button>
       <button
-        className="btn btn-outline-dark"
+        className="btn"
         onClick={() => {
           setState((prev) => ({ ...prev, showing: "liked" }));
         }}>
         LIKED POSTS
       </button>
+      </div>
       <div className="container">
         <div className="row row-cols-4">
           {state.showing === "own" && ownPostsArray}
