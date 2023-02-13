@@ -35,7 +35,7 @@ export default function HomePage() {
   return (
     <main>
 
-      <Parallax pages={3}>
+      <Parallax pages={2}>
         <ParallaxLayer
           speed={0.8}
           style={{
@@ -51,19 +51,22 @@ export default function HomePage() {
         </ParallaxLayer>
         <ParallaxLayer
           offset={0.5}
-          speed={0.2}
+          speed={0.1}
           style={{textAlign: 'center'}}>
           <h1>A new adventure awaits</h1>
         </ParallaxLayer>
         <ParallaxLayer
           offset={0}
           sticky={{ start: 0 , end: 0.1 }}>
-          <Navbar />
+          <div id="navbar-home-style">
+            <Navbar />
+          </div>
         </ParallaxLayer>
         <ParallaxLayer
-          speed={0.5}
+          speed={0.1}
           offset={1}>
           <div className="container">
+            <h2>Browse the latest entries from around the world</h2>
             <div className="row row-cols-4">
               {postsArray}
             </div>

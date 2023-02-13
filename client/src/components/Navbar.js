@@ -95,11 +95,11 @@ export default function Navbar() {
       <div className="nav-bar-item">
         {!cookies.session ? (
           <>
-            <button className="btn btn-secondary" onClick={() => login(2)}>
-              Login As Bob
+            <button className="btn btn-outline-light" onClick={() => login(2)}>
+              Login as Bob
             </button>
-            <button className="btn btn-secondary" onClick={() => login(3)}>
-              Login As Jessie
+            <button className="btn btn-outline-light" onClick={() => login(3)}>
+              Login as Jessie
             </button>
           </>
         ) : (
@@ -110,10 +110,13 @@ export default function Navbar() {
             >
               Logged in as {cookies.session.username}
             </span>
-            <button className="btn btn-secondary">
-              <Link to={`/create`}>+</Link>
+            <button className="btn btn-outline-light" onClick={() => navigate("/create")}>
+                +
             </button>
-            <button className="btn btn-secondary" onClick={() => logout()}>
+            <button className="btn btn-outline-light" onClick={() => navigate("/myprofile")}>
+                My Profile
+            </button>
+            <button className="btn btn-outline-light" onClick={() => logout()}>
               Logout
             </button>
           </>

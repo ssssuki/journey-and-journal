@@ -4,8 +4,10 @@ import axios from "axios";
 import useUser from "../hooks/useUser";
 import SmallPostItem from "../components/SmallPostItem";
 import Navbar from "../components/Navbar";
+import "../styles/SmallPostItem.scss";
+import "../styles/UserPage.scss"
 
-export default function HomePage() {
+export default function MyProfilePage() {
   const { cookies } = useUser();
   const [state, setState] = useState({
     ownPosts: [],
@@ -66,23 +68,27 @@ export default function HomePage() {
   return (
     <div>
       <Navbar />
-      <h1>My user Page</h1>
-      <h3
+      <h1>My user page</h1>
+      <button
+        className="btn btn-outline-dark"
         onClick={() => {
           setState((prev) => ({ ...prev, showing: "own" }));
-        }}
-      >
-        My Posts
-      </h3>
-      <h3
+        }}>
+        MY POSTS
+      </button>
+      <button
+        className="btn btn-outline-dark"
         onClick={() => {
           setState((prev) => ({ ...prev, showing: "liked" }));
-        }}
-      >
-        Liked Posts
-      </h3>
-      {state.showing === "own" && ownPostsArray}
-      {state.showing === "liked" && likedPostsArray}
+        }}>
+        LIKED POSTS
+      </button>
+      <div className="container">
+        <div className="row row-cols-4">
+          {state.showing === "own" && ownPostsArray}
+          {state.showing === "liked" && likedPostsArray}
+        </div>
+      </div>
     </div>
   );
 }
