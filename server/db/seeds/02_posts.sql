@@ -136,7 +136,7 @@ VALUES (
 VALUES (
   1, 
   'Waialua', 
-  'This beach was extremely beautiful. The water is clearly blue and the shade is everywhere .', 
+  'This beach was extremely beautiful. The water is clearly blue and the shade is everywhere.', 
   5, 
   'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1746&q=80', 
   21.1003, 
