@@ -43,31 +43,12 @@
 
 .search-bar {
   display: block;
-<<<<<<< HEAD
   width: 400px;
   height: 2.5em;
   border: 3px solid grey;
   border-radius: 10px;
 }
 
-=======
-  width: 300px;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid #efefef;
-  color: white;
-}
-
-.search-bar::placeholder {
-  color: rgba(255, 255, 255, 0.818);
-}
-
-.search-bar:focus {
-  outline: none;
-  border:1px solid rgb(188, 188, 188);
-}
-
->>>>>>> 4f54cf66d672a1862eff4be1b2dca4bfba4c0e0d
 .search-suggestions {
   position: absolute;
   z-index: 1000;
