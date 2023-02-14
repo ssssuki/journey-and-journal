@@ -43,11 +43,10 @@
 
 .search-bar {
   display: block;
-  width: 300px;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid #efefef;
-  color: white;
+  width: 400px;
+  height: 2.5em;
+  border: 3px solid grey;
+  border-radius: 10px;
 }
 
 .search-bar::placeholder {
