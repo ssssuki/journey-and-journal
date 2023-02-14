@@ -35,6 +35,9 @@ export default function CreatePost() {
   const { cookies } = useUser();
 
   const navigate = useNavigate();
+  if (!cookies.session) {
+    navigate("/");
+  }
 
   const PlacesAutocomplete = () => {
     const {

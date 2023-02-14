@@ -63,18 +63,16 @@ export default function IndividualPost() {
   //   return <div className="App">Loading...</div>;
   // }
 
-  const commentList = state.comments
-    .filter((comment) => comment.post_id === state.post.id)
-    .map((comment) => {
-      return (
-        <p key={comment.id}>
-          {comment.username}: {comment.content}
-        </p>
-      );
-    });
+  const commentList = state.comments.map((comment) => {
+    return (
+      <p key={comment.id}>
+        {comment.username}: {comment.content}
+      </p>
+    );
+  });
 
   const likesList = state.likes.map((like) => {
-    return <p>Likes: Liked By User: {like.user_id}</p>;
+    return <p key={like.id}>Likes: Liked By User: {like.user_id}</p>;
   });
 
   function submitComment() {
