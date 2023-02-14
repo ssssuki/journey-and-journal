@@ -70,20 +70,31 @@ export default function MyProfilePage() {
       <Navbar />
       <h3 className="title">My user page</h3>
       <div className="divider">
-      <div className="btn-group btn-group-toggle" data-toggle="buttons">
-          <input type="radio" className="btn-check" name="options" id="option1" autocomplete="off" defaultChecked
-        onClick={() => {
-          setState((prev) => ({ ...prev, showing: "own" }));
-        }} checked={state.showing === "own"} />
-          <label className="btn btn-secondary" for="option1">MY POSTS</label>
-
-          <input type="radio" className="btn-check" name="options" id="option2" autocomplete="off" 
-          onClick={() => {
-            setState((prev) => ({ ...prev, showing: "liked" }));
-          }}
-          
-          checked={state.showing === "liked"}/>
-          <label className="btn btn-secondary" for="option2">LIKED POSTS</label>
+        <div className="btn-group btn-group-toggle" data-toggle="buttons">
+          <input type="radio" 
+            className="btn-check" 
+            name="options" 
+            id="option1" 
+            autocomplete="off"
+            onClick={() => {
+              setState((prev) => ({ ...prev, showing: "own" }));
+            }} 
+            checked={state.showing === "own"} />
+          <label className="btn radio" for="option1">
+            MY POSTS
+          </label>
+          <input type="radio"
+            className="btn-check" 
+            name="options" 
+            id="option2" 
+            autocomplete="off"
+            onClick={() => {
+              setState((prev) => ({ ...prev, showing: "liked" }));
+            }}
+            checked={state.showing === "liked"} />
+          <label className="btn radio" for="option2">
+            LIKED POSTS
+          </label>
         </div>
       </div>
       <div className="container">

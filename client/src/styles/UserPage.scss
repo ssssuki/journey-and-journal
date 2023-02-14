@@ -6,12 +6,22 @@
 }
 
 .divider {
-  border-bottom: 1px solid rgb(86, 86, 86);
+  border-bottom: 1px solid rgb(222, 222, 222);
   margin-top: 0px;
   width: 90%;
   margin: auto;
+  margin-bottom: 2em;
 }
 
-.btn-user {
-  padding-left: 1em;
+.radio {
+  height: 2em;
+  border-radius: 0px;
+  color: #E6AACE;
+}
+
+.btn-group-toggle input[type="radio"]:checked + label{
+  color: #E6AACE;
+  background-color: rgb(222, 222, 222);
+  border: none;
+  font-weight: bold;
 }
