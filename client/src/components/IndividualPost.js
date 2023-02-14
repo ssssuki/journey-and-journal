@@ -135,6 +135,11 @@ export default function IndividualPost(props) {
       <button className={`like-button`} onClick={handleClick}>
         <span className="likes-counter">{`LikeCount | ${state.likeCount}`}</span>
       </button>
+      <div>
+        <h3>Weather</h3>
+        <p>Conditions: {state.weather.conditions}</p>
+        <p>Temp: {state.weather.temp}</p>
+      </div>
     </section>
   );
 }

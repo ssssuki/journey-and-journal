@@ -16,6 +16,7 @@ export default function useApplicationData(post_id, user_id) {
     likes: {},
     isLoading: true,
     isClicked: false,
+    weather: {},
   });
 
   useEffect(() => {
@@ -43,8 +44,22 @@ export default function useApplicationData(post_id, user_id) {
           comments: all[1].data,
           likes: all[2].data,
           likeCount: all[2].data.length,
-          isLoading: false,
+          // isLoading: false,
         }));
+        axios
+          .get(
+            `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${all[0].data[0].latitude},${all[0].data[0].longitude}?key=GJE8V8B2YP8EY88S5C34HNVL8`
+          )
+          .then((res) => {
+            setState((prev) => ({
+              ...prev,
+              isLoading: false,
+              weather: {
+                conditions: res.data.currentConditions.conditions,
+                temp: res.data.currentConditions.temp,
+              },
+            }));
+          });
       });
     }
   }, []);
