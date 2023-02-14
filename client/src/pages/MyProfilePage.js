@@ -5,7 +5,7 @@ import useUser from "../hooks/useUser";
 import SmallPostItem from "../components/SmallPostItem";
 import Navbar from "../components/Navbar";
 import "../styles/SmallPostItem.scss";
-import "../styles/UserPage.scss"
+import "../styles/UserPage.scss";
 
 export default function MyProfilePage() {
   const { cookies } = useUser();
@@ -70,20 +70,21 @@ export default function MyProfilePage() {
       <Navbar />
       <h3 className="title">My user page</h3>
       <div className="divider">
-      <button
-        className="btn"
+      <div className="btn-group btn-group-toggle" data-toggle="buttons">
+          <input type="radio" className="btn-check" name="options" id="option1" autocomplete="off" defaultChecked
         onClick={() => {
           setState((prev) => ({ ...prev, showing: "own" }));
-        }}>
-        MY POSTS
-      </button>
-      <button
-        className="btn"
-        onClick={() => {
-          setState((prev) => ({ ...prev, showing: "liked" }));
-        }}>
-        LIKED POSTS
-      </button>
+        }} checked={state.showing === "own"} />
+          <label className="btn btn-secondary" for="option1">MY POSTS</label>
+
+          <input type="radio" className="btn-check" name="options" id="option2" autocomplete="off" 
+          onClick={() => {
+            setState((prev) => ({ ...prev, showing: "liked" }));
+          }}
+          
+          checked={state.showing === "liked"}/>
+          <label className="btn btn-secondary" for="option2">LIKED POSTS</label>
+        </div>
       </div>
       <div className="container">
         <div className="row row-cols-4">
