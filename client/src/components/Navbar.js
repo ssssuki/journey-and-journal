@@ -40,7 +40,8 @@ export default function Navbar() {
 
         getGeocode({ address: description }).then((results) => {
           const { lat, lng } = getLatLng(results[0]);
-          navigate("/search", { state: { lat, lng } });
+          navigate(`/search/${lat},${lng}`, { state: { lat, lng } });
+          navigate(0);
         });
       };
 
