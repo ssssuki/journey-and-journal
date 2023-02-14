@@ -4,6 +4,16 @@ import { useParams } from "react-router-dom";
 import createComment from "../hooks/createComments";
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
 import createLikes from "../hooks/CreateLikes";
+import {
+  BorderBottomOutlined,
+  BorderTopOutlined,
+  RadiusBottomleftOutlined,
+  RadiusBottomrightOutlined,
+  RadiusUpleftOutlined,
+  RadiusUprightOutlined,
+} from "@ant-design/icons";
+import { Button, Divider, notification, Space } from "antd";
+import axios from "axios";
 
 const containerStyle = {
   width: "400px",
@@ -16,9 +26,18 @@ const center = {
 };
 
 export default function IndividualPost(props) {
+  const [api, contextHolder] = notification.useNotification();
+  const openNotification = (placement) => {
+    api.info({
+      message: `Notification ${placement}`,
+      description: "New comment created!",
+      placement,
+    });
+  };
+
   let { id } = useParams();
 
-  const { state, setState } = useApplicationData(id, 1);
+  const { state, setState } = useApplicationData(id);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -56,7 +75,7 @@ export default function IndividualPost(props) {
 
   function submitComment() {
     const comment = {
-      user_id: 1,
+      user_id: state.user_id,
       post_id: state.post.id,
       content: state.comment,
     };
@@ -65,10 +84,18 @@ export default function IndividualPost(props) {
 
   function LikePost() {
     const like = {
-      user_id: 1,
+      user_id: state.user_id,
       post_id: state.post.id,
     };
     createLikes(like);
+  }
+
+  function NotifiedComment() {
+    submitComment();
+    openNotification("topLeft");
+    axios.get(`http://localhost:8080/api/comments/${id}`).then((res) => {
+      setState({ ...state, comments: res.data, comment: "" });
+    });
   }
 
   const handleClick = () => {
@@ -118,7 +145,7 @@ export default function IndividualPost(props) {
         <></>
       )}
       <div className="comment">{commentList}</div>
-      <form onSubmit={(event) => event.preventDefault()}>
+      <form>
         <input
           name="comment"
           type="text"
@@ -129,12 +156,27 @@ export default function IndividualPost(props) {
           }
         />
       </form>
-      <button onClick={() => submitComment()}>comment</button>
+      <Space>
+        <Button
+          type="primary"
+          icon={<RadiusBottomrightOutlined />}
+          onClick={() => NotifiedComment()}
+        >
+          comment
+        </Button>
+      </Space>
+
       <button onClick={() => LikePost()}>like</button>
 
       <button className={`like-button`} onClick={handleClick}>
         <span className="likes-counter">{`LikeCount | ${state.likeCount}`}</span>
       </button>
+      <div>
+        <h3>Weather</h3>
+        <p>Conditions: {state.weather.conditions}</p>
+        <p>Temp: {state.weather.temp}</p>
+      </div>
+      <div>{contextHolder}</div>
     </section>
   );
 }
