@@ -14,7 +14,7 @@ import MyProfilePage from "./pages/MyProfilePage";
 import reportWebVitals from "./reportWebVitals";
 // import Application from "./components/Application";
 import Posts from "./components/Posts";
-import IndividualPost from "./components/IndividualPost";
+import IndividualPostPage from "./pages/IndividualPostPage";
 import SearchPage from "./pages/SearchPage";
 
 const router = createBrowserRouter([
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/posts/:id",
-    element: <IndividualPost />,
+    element: <IndividualPostPage />,
   },
   {
     path: "/user/:id",
@@ -41,10 +41,6 @@ const router = createBrowserRouter([
   {
     path: "/myprofile",
     element: <MyProfilePage />,
-  },
-  {
-    path: "/posts/:id",
-    element: <IndividualPost />,
   },
   {
     path: "/user",

@@ -33,6 +33,19 @@ module.exports = (db) => {
       })
       .catch((err) => console.log(err));
   });
+  router.put("/likes/delete", (request, response) => {
+    const { user_id, post_id } = request.body.data;
+    db.query(
+      `
+      DELETE FROM likes WHERE user_id = $1 AND post_id = $2;
+      `,
+      [user_id, post_id]
+    )
+      .then((res) => {
+        response.status(204).json({});
+      })
+      .catch((err) => console.log(err));
+  });
 
   return router;
 };

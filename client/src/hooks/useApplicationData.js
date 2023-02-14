@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import useUser from "./useUser";
+// import useUser from "./useUser";
 
 export default function useApplicationData(post_id) {
-  const { cookies } = useUser();
+  // const { cookies } = useUser();
 
   const [state, setState] = useState({
-    user_id: cookies.session.id,
+    // user_id: cookies.session ? cookies.session.id : null,
     post: null,
     comment: null,
     like: null,
