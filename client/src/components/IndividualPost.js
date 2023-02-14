@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import useApplicationData from "../hooks/useApplicationData";
 import useUser from "../hooks/useUser";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import createComment from "../hooks/createComments";
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
 import createLikes from "../hooks/CreateLikes";
@@ -37,8 +37,9 @@ export default function IndividualPost() {
     });
   };
 
-  let { id } = useParams();
+  const navigate = useNavigate();
 
+  let { id } = useParams();
   const { state, setState } = useApplicationData(id);
   const { cookies } = useUser();
 
@@ -126,7 +127,12 @@ export default function IndividualPost() {
         <div className="photos">
           <img src={state.post.photo_link} height="200" />
         </div>
-        <div className="userid">UserID: {state.post.user_id}</div>
+        <div className="userid">
+          Posted by:{" "}
+          <span onClick={() => navigate(`/user/${state.post.user_id}`)}>
+            {state.post.username}
+          </span>
+        </div>
         <div className="postcontent">
           Title: {state.post.title} Entry: {state.post.entry}
         </div>
