@@ -1,9 +1,11 @@
 import React, { useState, useCallback } from "react";
 import useApplicationData from "../hooks/useApplicationData";
-import { useParams } from "react-router-dom";
+import useUser from "../hooks/useUser";
+import { useParams, useNavigate } from "react-router-dom";
 import createComment from "../hooks/createComments";
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
 import createLikes from "../hooks/CreateLikes";
+import deleteLike from "../hooks/deleteLike";
 import {
   BorderBottomOutlined,
   BorderTopOutlined,
@@ -25,7 +27,7 @@ const center = {
   lng: -38.523,
 };
 
-export default function IndividualPost(props) {
+export default function IndividualPost() {
   const [api, contextHolder] = notification.useNotification();
   const openNotification = (placement) => {
     api.info({
@@ -35,9 +37,11 @@ export default function IndividualPost(props) {
     });
   };
 
-  let { id } = useParams();
+  const navigate = useNavigate();
 
+  let { id } = useParams();
   const { state, setState } = useApplicationData(id);
+  const { cookies } = useUser();
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -64,7 +68,7 @@ export default function IndividualPost(props) {
     .map((comment) => {
       return (
         <p key={comment.id}>
-          Comment: {comment.content} By User: {comment.user_id}
+          {comment.username}: {comment.content}
         </p>
       );
     });
@@ -75,7 +79,7 @@ export default function IndividualPost(props) {
 
   function submitComment() {
     const comment = {
-      user_id: state.user_id,
+      user_id: cookies.session.id,
       post_id: state.post.id,
       content: state.comment,
     };
@@ -84,10 +88,20 @@ export default function IndividualPost(props) {
 
   function LikePost() {
     const like = {
-      user_id: state.user_id,
+      user_id: cookies.session.id,
       post_id: state.post.id,
     };
-    createLikes(like);
+    if (
+      state.likes.find(
+        (l) => l.user_id == cookies.session.id && l.post_id == state.post.id
+      )
+    ) {
+      console.log("alright liked: now removing like");
+      deleteLike(like);
+    } else {
+      console.log("not liked yet, now liking");
+      createLikes(like);
+    }
   }
 
   function NotifiedComment() {
@@ -113,7 +127,12 @@ export default function IndividualPost(props) {
         <div className="photos">
           <img src={state.post.photo_link} height="200" />
         </div>
-        <div className="userid">UserID: {state.post.user_id}</div>
+        <div className="userid">
+          Posted by:{" "}
+          <span onClick={() => navigate(`/user/${state.post.user_id}`)}>
+            {state.post.username}
+          </span>
+        </div>
         <div className="postcontent">
           Title: {state.post.title} Entry: {state.post.entry}
         </div>
@@ -145,32 +164,46 @@ export default function IndividualPost(props) {
         <></>
       )}
       <div className="comment">{commentList}</div>
-      <form>
-        <input
-          name="comment"
-          type="text"
-          placeholder="Enter your comments!"
-          value={state.comment}
-          onChange={(event) =>
-            setState({ ...state, comment: event.target.value })
-          }
-        />
-      </form>
-      <Space>
-        <Button
-          type="primary"
-          icon={<RadiusBottomrightOutlined />}
-          onClick={() => NotifiedComment()}
-        >
-          comment
-        </Button>
-      </Space>
+      {cookies.session ? (
+        <>
+          <form>
+            <input
+              name="comment"
+              type="text"
+              placeholder="Enter your comments!"
+              value={state.comment}
+              onChange={(event) =>
+                setState({ ...state, comment: event.target.value })
+              }
+            />
+          </form>
+          <Space>
+            <Button
+              type="primary"
+              icon={<RadiusBottomrightOutlined />}
+              onClick={() => NotifiedComment()}
+            >
+              comment
+            </Button>
+          </Space>
+        </>
+      ) : (
+        <></>
+      )}
 
-      <button onClick={() => LikePost()}>like</button>
+      {cookies.session ? (
+        <>
+          <button onClick={() => LikePost()}>like</button>
 
-      <button className={`like-button`} onClick={handleClick}>
-        <span className="likes-counter">{`LikeCount | ${state.likeCount}`}</span>
-      </button>
+          <button className={`like-button`} onClick={handleClick}>
+            <span className="likes-counter">{`LikeCount | ${state.likeCount}`}</span>
+          </button>
+        </>
+      ) : (
+        <>
+          <h4>Likes: {state.likeCount}</h4>
+        </>
+      )}
       <div>
         <h3>Weather</h3>
         <p>Conditions: {state.weather.conditions}</p>
