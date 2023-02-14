@@ -25,7 +25,7 @@ export default function SearchResults() {
     );
   });
   return (
-    <div>
+    <div className="search-results">
       {state.isLoading ? <h1>Loading...</h1> : <div>{renderedResults}</div>}
     </div>
   );
