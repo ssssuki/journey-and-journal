@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import useUser from "./useUser";
 
-export default function useApplicationData(post_id, user_id) {
+export default function useApplicationData(post_id) {
   const { cookies } = useUser();
 
   const [state, setState] = useState({

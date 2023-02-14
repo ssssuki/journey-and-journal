@@ -13,6 +13,7 @@ import {
   RadiusUprightOutlined,
 } from "@ant-design/icons";
 import { Button, Divider, notification, Space } from "antd";
+import axios from "axios";
 
 const containerStyle = {
   width: "400px",
@@ -29,15 +30,14 @@ export default function IndividualPost(props) {
   const openNotification = (placement) => {
     api.info({
       message: `Notification ${placement}`,
-      description:
-        "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+      description: "New comment created!",
       placement,
     });
   };
 
   let { id } = useParams();
 
-  const { state, setState } = useApplicationData(id, 1);
+  const { state, setState } = useApplicationData(id);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -93,6 +93,9 @@ export default function IndividualPost(props) {
   function NotifiedComment() {
     submitComment();
     openNotification("topLeft");
+    axios.get(`http://localhost:8080/api/comments/${id}`).then((res) => {
+      setState({ ...state, comments: res.data, comment: "" });
+    });
   }
 
   const handleClick = () => {
@@ -142,7 +145,7 @@ export default function IndividualPost(props) {
         <></>
       )}
       <div className="comment">{commentList}</div>
-      <form onSubmit={(event) => event.preventDefault()}>
+      <form>
         <input
           name="comment"
           type="text"
