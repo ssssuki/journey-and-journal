@@ -5,7 +5,7 @@ export default function createComment(data) {
   return axios
     .put(`http://localhost:8080/api/comments`, { data })
     .then((res) => {
-      window.location.reload() 
+      // window.location.reload() 
     })
     .catch((err) => console.log(err));
 }

@@ -4,6 +4,15 @@ import { useParams } from "react-router-dom";
 import createComment from "../hooks/createComments";
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
 import createLikes from "../hooks/CreateLikes";
+import {
+  BorderBottomOutlined,
+  BorderTopOutlined,
+  RadiusBottomleftOutlined,
+  RadiusBottomrightOutlined,
+  RadiusUpleftOutlined,
+  RadiusUprightOutlined,
+} from "@ant-design/icons";
+import { Button, Divider, notification, Space } from "antd";
 
 const containerStyle = {
   width: "400px",
@@ -16,6 +25,16 @@ const center = {
 };
 
 export default function IndividualPost(props) {
+  const [api, contextHolder] = notification.useNotification();
+  const openNotification = (placement) => {
+    api.info({
+      message: `Notification ${placement}`,
+      description:
+        "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+      placement,
+    });
+  };
+
   let { id } = useParams();
 
   const { state, setState } = useApplicationData(id, 1);
@@ -69,6 +88,11 @@ export default function IndividualPost(props) {
       post_id: state.post.id,
     };
     createLikes(like);
+  }
+
+  function NotifiedComment() {
+    submitComment();
+    openNotification("topLeft");
   }
 
   const handleClick = () => {
@@ -129,7 +153,16 @@ export default function IndividualPost(props) {
           }
         />
       </form>
-      <button onClick={() => submitComment()}>comment</button>
+      <Space>
+        <Button
+          type="primary"
+          icon={<RadiusBottomrightOutlined />}
+          onClick={() => NotifiedComment()}
+        >
+          comment
+        </Button>
+      </Space>
+
       <button onClick={() => LikePost()}>like</button>
 
       <button className={`like-button`} onClick={handleClick}>
@@ -140,6 +173,7 @@ export default function IndividualPost(props) {
         <p>Conditions: {state.weather.conditions}</p>
         <p>Temp: {state.weather.temp}</p>
       </div>
+      <div>{contextHolder}</div>
     </section>
   );
 }
