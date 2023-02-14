@@ -59,9 +59,9 @@ export default function IndividualPost() {
     setMap(null);
   }, []);
 
-  if (state.isLoading) {
-    return <div className="App">Loading...</div>;
-  }
+  // if (state.isLoading) {
+  //   return <div className="App">Loading...</div>;
+  // }
 
   const commentList = state.comments
     .filter((comment) => comment.post_id === state.post.id)
