@@ -47,7 +47,7 @@ const router = createBrowserRouter([
     element: <UserPage />,
   },
   {
-    path: "/search/",
+    path: "/search/:coords",
     element: <SearchPage />,
   },
 ]);

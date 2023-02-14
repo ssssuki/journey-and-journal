@@ -7,11 +7,11 @@ module.exports = (db) => {
     });
   });
   router.get("/posts/:id", (request, response) => {
-    db.query(`SELECT * FROM posts WHERE id=${request.params.id};`).then(
-      ({ rows: posts }) => {
-        response.json(posts);
-      }
-    );
+    db.query(
+      `SELECT posts.*, users.username FROM posts JOIN users ON posts.user_id = users.id WHERE posts.id=${request.params.id};`
+    ).then(({ rows: posts }) => {
+      response.json(posts);
+    });
   });
   router.put("/posts", (request, response) => {
     const {
