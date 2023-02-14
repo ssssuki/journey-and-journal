@@ -67,7 +67,7 @@ export default function IndividualPost() {
     .map((comment) => {
       return (
         <p key={comment.id}>
-          Comment: {comment.content} By User: {comment.user_id}
+          {comment.username}: {comment.content}
         </p>
       );
     });
