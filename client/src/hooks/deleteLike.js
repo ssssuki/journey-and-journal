@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export default function createLikes(data) {
+export default function deleteLike(data) {
   return axios
-    .put(`http://localhost:8080/api/likes`, { data })
+    .put(`http://localhost:8080/api/likes/delete`, { data })
     .then((res) => {
       window.location.reload();
     })

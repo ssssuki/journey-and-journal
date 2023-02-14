@@ -1,7 +1,6 @@
-import React, { useState } from "react";
 import useUser from "../hooks/useUser";
 import "../styles/navbar.scss";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -110,11 +109,17 @@ export default function Navbar() {
             >
               Logged in as {cookies.session.username}
             </span>
-            <button className="btn btn-outline-light" onClick={() => navigate("/create")}>
-                +
+            <button
+              className="btn btn-outline-light"
+              onClick={() => navigate("/create")}
+            >
+              +
             </button>
-            <button className="btn btn-outline-light" onClick={() => navigate("/myprofile")}>
-                My Profile
+            <button
+              className="btn btn-outline-light"
+              onClick={() => navigate("/myprofile")}
+            >
+              My Profile
             </button>
             <button className="btn btn-outline-light" onClick={() => logout()}>
               Logout
