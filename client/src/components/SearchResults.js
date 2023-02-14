@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useSearch from "../hooks/useSearch";
 import SmallPostItem from "../components/SmallPostItem";
 import "../styles/SmallPostItem.scss";
@@ -7,6 +7,7 @@ import "../styles/SmallPostItem.scss";
 export default function SearchResults() {
   const location = useLocation();
   const navigate = useNavigate();
+  console.log(location);
   if (!location.state) {
     navigate("/");
   }
