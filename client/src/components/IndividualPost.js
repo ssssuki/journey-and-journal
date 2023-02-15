@@ -5,7 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import createComment from "../hooks/createComments";
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faStar, faCloudSun } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faStar } from "@fortawesome/free-solid-svg-icons";
 import createLikes from "../hooks/CreateLikes";
 import deleteLike from "../hooks/deleteLike";
 import {
@@ -68,7 +68,8 @@ export default function IndividualPost() {
   const commentList = state.comments.map((comment) => {
     return (
       <p key={comment.id}>
-        {comment.username}: {comment.content}
+        <div id="commenter"><FontAwesomeIcon icon={faUser} id="user" /> {comment.username}</div>
+        <div>{comment.content}</div>
       </p>
     );
   });
@@ -184,40 +185,46 @@ export default function IndividualPost() {
           <></>
         )}
         <div className="weather">
-        <FontAwesomeIcon icon={faCloudSun} id="cloud-sun" />
-          The current condition in {state.post.address} is
+          The current weather condition in {state.post.address} is
           <span> {state.weather.conditions} </span>
           with a temperature of
-          <span> {state.weather.temp}°F. </span>
+          <span> {state.weather.temp}°F </span>
+          .
         </div>
-        <div className="comment">{commentList}</div>
+        <div className="comment-section"></div>
+        <h4>Comments</h4>
         {cookies.session ? (
           <>
             <form>
-              <input
+              <textarea
                 name="comment"
+                className="comment-box"
                 type="text"
-                placeholder="Enter your comments!"
+                placeholder="Leave a comment"
                 value={state.comment}
                 onChange={(event) =>
                   setState({ ...state, comment: event.target.value })
                 }
               />
             </form>
-            <Space>
-              <Button
-                type="primary"
-                icon={<RadiusBottomrightOutlined />}
-                onClick={() => NotifiedComment()}
-              >
-                comment
-              </Button>
-            </Space>
+            <div className="comment-button">
+              <Space>
+                <Button
+                  type="primary"
+                  icon={<RadiusBottomrightOutlined />}
+                  onClick={() => NotifiedComment()}
+                >
+                  Comment
+                </Button>
+              </Space>
+            </div>
           </>
         ) : (
           <></>
         )}
-
+        <div className="comments">
+          {commentList}
+        </div>
         {cookies.session ? (
           <>
             <button onClick={() => LikePost()}>like</button>
