@@ -18,6 +18,19 @@ module.exports = (db) => {
     .then(({ rows: posts }) => {
       response.json(posts);
     });
+    
+  })
+  router.get(`/users/username/:id`, (request, response) => {
+    db.query(
+      `
+      SELECT *
+      FROM users
+      WHERE id=${request.params.id};
+      `)
+    .then(({ rows: posts }) => {
+      response.json(posts);
+    });
+    
   })
   return router;
 };

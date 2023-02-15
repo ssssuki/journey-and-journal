@@ -3,23 +3,32 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import SmallPostItem from '../components/SmallPostItem';
 import "../styles/UserPage.scss";
-import Navbar from "../components/Navbar"
+import Navbar from "../components/Navbar";
 
 
 export default function UserPage() {
 
-  const [posts, setUser] = useState([]);
+  const [userData, setUserData] = useState({
+    posts: [],
+    username: null
+  });
   const userID = useParams().id;
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/users/${userID}`)
-      .then(res => {
-        console.log(res.data);
-        setUser(res.data);
-      });
+    Promise.all([
+      axios.get(`http://localhost:8080/api/users/${userID}`),
+      axios.get(`http://localhost:8080/api/users/username/${userID}`),
+    ]).then((all) => {
+      console.log(all);
+      setUserData((prev) => ({
+        ...prev,
+        posts: all[0].data,
+        username: all[1].data[0].username
+      }));
+    });
   }, []);
 
-  const postsArray = posts.map(post => {
+  const postsArray = userData.posts.map(post => {
     return (
       < SmallPostItem
         key={post.id}
@@ -34,7 +43,7 @@ export default function UserPage() {
   return (
     <div>
       <Navbar />
-      <h3 className="title">UserID {userID}'s journal</h3>
+      <h3 className="title">{userData.username}'s journal</h3>
       <div className="container">
         <div className="row row-cols-4">
           {postsArray}
