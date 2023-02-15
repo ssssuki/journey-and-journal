@@ -20,7 +20,7 @@ section {
   height: 100vh;
 }
 
-.photos > img {
+.photos>img {
   width: 100%;
   height: 100%;
 }
@@ -34,11 +34,31 @@ h2 {
   font-weight: bold;
 }
 
+.userid:hover {
+  color: #499167;
+}
+
 #user {
-  padding-right: 5px;
+  margin-right: 5px;
 }
 
 .post-content-container {
-  padding-top: 2em;
+  margin-top: 1em;
+  border-radius: 10px;
+  background-color: #e2e2e2;
+  padding: 10px;
 }
 
+.rating {
+  color: #E6AACE;
+  margin-bottom: 5px;
+}
+
+.weather {
+  padding-top: 15px;
+  font-size: 13px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  padding: 1em;
+}

@@ -5,7 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import createComment from "../hooks/createComments";
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faStar, faCloudSun } from "@fortawesome/free-solid-svg-icons";
 import createLikes from "../hooks/CreateLikes";
 import deleteLike from "../hooks/deleteLike";
 import {
@@ -124,14 +124,14 @@ export default function IndividualPost() {
   const starArray = () => {
     let starsArray = [];
     for (let i = 0; i < state.post.rating; i++) {
-      starsArray.push(<FontAwesomeIcon icon={faStar} />)
+      starsArray.push(<FontAwesomeIcon icon={faStar} />);
     }
     return starsArray;
-  }
+  };
 
   const renderStarArray = starArray().map((star) => {
     return star;
-  })
+  });
 
 
   return (
@@ -183,6 +183,13 @@ export default function IndividualPost() {
         ) : (
           <></>
         )}
+        <div className="weather">
+        <FontAwesomeIcon icon={faCloudSun} id="cloud-sun" />
+          The current condition in {state.post.address} is
+          <span> {state.weather.conditions} </span>
+          with a temperature of
+          <span> {state.weather.temp}°F. </span>
+        </div>
         <div className="comment">{commentList}</div>
         {cookies.session ? (
           <>
@@ -224,11 +231,6 @@ export default function IndividualPost() {
             <h4>Likes: {state.likeCount}</h4>
           </>
         )}
-        <div>
-          <h3>Weather</h3>
-          <p>Conditions: {state.weather.conditions}</p>
-          <p>Temp: {state.weather.temp}</p>
-        </div>
         <div>{contextHolder}</div>
       </div>
     </section>
