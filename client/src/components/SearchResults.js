@@ -27,7 +27,14 @@ export default function SearchResults() {
   });
   return (
     <div className="search-results">
-      {state.isLoading ? <h1>Loading...</h1> : <div>{renderedResults}</div>}
+      {state.isLoading ? <h3>Loading...</h3> : 
+      <div className="container">
+        <h3>Showing results for</h3>
+      <div className="row row-cols-4">
+        {renderedResults}
+      </div>
+      </div>
+      }
     </div>
   );
 }

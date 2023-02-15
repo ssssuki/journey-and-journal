@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import SmallPostItem from '../components/SmallPostItem';
-import "../styles/UserPage.scss"
+import "../styles/UserPage.scss";
+import Navbar from "../components/Navbar"
 
 
 export default function UserPage() {
@@ -32,9 +33,15 @@ export default function UserPage() {
 
   return (
     <div>
-      <h1>User Page {userID}</h1>
-      {postsArray}
+      <Navbar />
+      <h3 className="title">UserID {userID}'s journal</h3>
+      <div className="container">
+        <div className="row row-cols-4">
+          {postsArray}
+        </div>
+      </div>
+
     </div>
-  )
+  );
 
 }
