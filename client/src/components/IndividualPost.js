@@ -18,8 +18,8 @@ import { Button, Divider, notification, Space } from "antd";
 import axios from "axios";
 
 const containerStyle = {
-  width: "400px",
-  height: "400px",
+  width: "350px",
+  height: "350px",
 };
 
 const center = {
@@ -59,9 +59,9 @@ export default function IndividualPost() {
     setMap(null);
   }, []);
 
-  // if (state.isLoading) {
-  //   return <div className="App">Loading...</div>;
-  // }
+  if (state.isLoading) {
+    return <div className="App">Loading...</div>;
+  }
 
   const commentList = state.comments.map((comment) => {
     return (
@@ -121,93 +121,97 @@ export default function IndividualPost() {
 
   return (
     <section>
-      <div className="individualPost">
-        <div className="photos">
-          <img src={state.post.photo_link} height="200" />
+      <div className="container" id="left">
+        <div className="individualPost">
+          <div className="photos">
+            <img src={state.post.photo_link} height="200" />
+          </div>
+          <div className="userid">
+            Posted by:{" "}
+            <span onClick={() => navigate(`/user/${state.post.user_id}`)}>
+              {state.post.username}
+            </span>
+          </div>
+          <div className="postcontent">
+            Title: {state.post.title} Entry: {state.post.entry}
+          </div>
+          <div className="rating">Rating: {state.post.rating}</div>
+          <div className="likes"> {likesList}</div>
         </div>
-        <div className="userid">
-          Posted by:{" "}
-          <span onClick={() => navigate(`/user/${state.post.user_id}`)}>
-            {state.post.username}
-          </span>
-        </div>
-        <div className="postcontent">
-          Title: {state.post.title} Entry: {state.post.entry}
-        </div>
-        <div className="rating">Rating: {state.post.rating}</div>
-        <div className="likes"> {likesList}</div>
       </div>
-      {isLoaded ? (
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={
-            state.post.longitude && state.post.latitude
-              ? {
+      <div className="container" id="right">
+        {isLoaded ? (
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={
+              state.post.longitude && state.post.latitude
+                ? {
                   lat: Number(state.post.latitude),
                   lng: Number(state.post.longitude),
                 }
-              : center
-          }
-          onLoad={onLoad}
-          onUnmount={onUnmount}
-        >
-          <MarkerF
-            position={{
-              lat: Number(state.post.latitude),
-              lng: Number(state.post.longitude),
-            }}
-          />
-        </GoogleMap>
-      ) : (
-        <></>
-      )}
-      <div className="comment">{commentList}</div>
-      {cookies.session ? (
-        <>
-          <form>
-            <input
-              name="comment"
-              type="text"
-              placeholder="Enter your comments!"
-              value={state.comment}
-              onChange={(event) =>
-                setState({ ...state, comment: event.target.value })
-              }
+                : center
+            }
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+          >
+            <MarkerF
+              position={{
+                lat: Number(state.post.latitude),
+                lng: Number(state.post.longitude),
+              }}
             />
-          </form>
-          <Space>
-            <Button
-              type="primary"
-              icon={<RadiusBottomrightOutlined />}
-              onClick={() => NotifiedComment()}
-            >
-              comment
-            </Button>
-          </Space>
-        </>
-      ) : (
-        <></>
-      )}
+          </GoogleMap>
+        ) : (
+          <></>
+        )}
+        <div className="comment">{commentList}</div>
+        {cookies.session ? (
+          <>
+            <form>
+              <input
+                name="comment"
+                type="text"
+                placeholder="Enter your comments!"
+                value={state.comment}
+                onChange={(event) =>
+                  setState({ ...state, comment: event.target.value })
+                }
+              />
+            </form>
+            <Space>
+              <Button
+                type="primary"
+                icon={<RadiusBottomrightOutlined />}
+                onClick={() => NotifiedComment()}
+              >
+                comment
+              </Button>
+            </Space>
+          </>
+        ) : (
+          <></>
+        )}
 
-      {cookies.session ? (
-        <>
-          <button onClick={() => LikePost()}>like</button>
+        {cookies.session ? (
+          <>
+            <button onClick={() => LikePost()}>like</button>
 
-          <button className={`like-button`} onClick={handleClick}>
-            <span className="likes-counter">{`LikeCount | ${state.likeCount}`}</span>
-          </button>
-        </>
-      ) : (
-        <>
-          <h4>Likes: {state.likeCount}</h4>
-        </>
-      )}
-      <div>
-        <h3>Weather</h3>
-        <p>Conditions: {state.weather.conditions}</p>
-        <p>Temp: {state.weather.temp}</p>
+            <button className={`like-button`} onClick={handleClick}>
+              <span className="likes-counter">{`LikeCount | ${state.likeCount}`}</span>
+            </button>
+          </>
+        ) : (
+          <>
+            <h4>Likes: {state.likeCount}</h4>
+          </>
+        )}
+        <div>
+          <h3>Weather</h3>
+          <p>Conditions: {state.weather.conditions}</p>
+          <p>Temp: {state.weather.temp}</p>
+        </div>
+        <div>{contextHolder}</div>
       </div>
-      <div>{contextHolder}</div>
     </section>
   );
 }

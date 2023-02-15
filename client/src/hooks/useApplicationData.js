@@ -24,6 +24,7 @@ export default function useApplicationData(post_id) {
         axios.get("http://localhost:8080/api/posts"),
         axios.get("http://localhost:8080/api/comments"),
       ]).then((all) => {
+        console.log(all);
         setState((prev) => ({
           ...prev,
           posts: all[0].data,
@@ -37,6 +38,7 @@ export default function useApplicationData(post_id) {
         axios.get(`http://localhost:8080/api/comments/${post_id}`),
         axios.get(`http://localhost:8080/api/likes/${post_id}`),
       ]).then((all) => {
+        console.log(all);
         setState((prev) => ({
           ...prev,
           post: all[0].data[0],
@@ -50,6 +52,7 @@ export default function useApplicationData(post_id) {
             `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${all[0].data[0].latitude},${all[0].data[0].longitude}?key=GJE8V8B2YP8EY88S5C34HNVL8`
           )
           .then((res) => {
+            console.log(all);
             setState((prev) => ({
               ...prev,
               isLoading: false,

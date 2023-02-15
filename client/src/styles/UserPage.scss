@@ -13,15 +13,15 @@
   margin-bottom: 2em;
 }
 
-.radio {
+.btn-group-toggle > .radio {
   height: 2em;
+  color: #33673B;
+  border: none;
   border-radius: 0px;
-  color: #E6AACE;
 }
 
 .btn-group-toggle input[type="radio"]:checked + label{
-  color: #E6AACE;
+  color: #33673B;
   background-color: rgb(222, 222, 222);
-  border: none;
   font-weight: bold;
 }
