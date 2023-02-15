@@ -4,6 +4,8 @@ import useUser from "../hooks/useUser";
 import { useParams, useNavigate } from "react-router-dom";
 import createComment from "../hooks/createComments";
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faStar } from "@fortawesome/free-solid-svg-icons";
 import createLikes from "../hooks/CreateLikes";
 import deleteLike from "../hooks/deleteLike";
 import {
@@ -119,6 +121,19 @@ export default function IndividualPost() {
     setState({ ...state, isClicked: !state.isClicked });
   };
 
+  const starArray = () => {
+    let starsArray = [];
+    for (let i = 0; i < state.post.rating; i++) {
+      starsArray.push(<FontAwesomeIcon icon={faStar} />)
+    }
+    return starsArray;
+  }
+
+  const renderStarArray = starArray().map((star) => {
+    return star;
+  })
+
+
   return (
     <section>
       <div className="container" id="left">
@@ -126,17 +141,21 @@ export default function IndividualPost() {
           <div className="photos">
             <img src={state.post.photo_link} height="200" />
           </div>
+          <div className="title">
+            <h2>{state.post.title}</h2>
+          </div>
           <div className="userid">
-            Posted by:{" "}
+            {" "}
             <span onClick={() => navigate(`/user/${state.post.user_id}`)}>
+              <FontAwesomeIcon icon={faUser} id="user" />
               {state.post.username}
             </span>
           </div>
-          <div className="postcontent">
-            Title: {state.post.title} Entry: {state.post.entry}
+          <div className="post-content-container">
+            <div className="rating">{renderStarArray}</div>
+            <div className="postcontent">{state.post.entry}</div>
+            {/* <div className="likes"> {likesList}</div> */}
           </div>
-          <div className="rating">Rating: {state.post.rating}</div>
-          <div className="likes"> {likesList}</div>
         </div>
       </div>
       <div className="container" id="right">
