@@ -5,7 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import createComment from "../hooks/createComments";
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faStar, faHeart } from "@fortawesome/free-solid-svg-icons";
 import createLikes from "../hooks/CreateLikes";
 import deleteLike from "../hooks/deleteLike";
 import {
@@ -75,7 +75,7 @@ export default function IndividualPost() {
   });
 
   const likesList = state.likes.map((like) => {
-    return <p key={like.id}>Likes: Liked By User: {like.user_id}</p>;
+    return <p key={like.id}>Liked by User: {like.user_id}</p>;
   });
 
   function submitComment() {
@@ -109,7 +109,7 @@ export default function IndividualPost() {
     submitComment();
     openNotification("topLeft");
     axios.get(`http://localhost:8080/api/comments/${id}`).then((res) => {
-      setState({ ...state, comments: res.data, comment: "" });
+      setState((prev) => ({ ...prev, comments: res.data, comment: "" }));
     });
   }
 
@@ -191,6 +191,17 @@ export default function IndividualPost() {
           <span> {state.weather.temp}°F </span>
           .
         </div>
+        <div className="likes">
+          <h4>Likes: {state.likeCount}
+            {cookies.session && 
+            <>
+              <button onClick={() => LikePost()}><FontAwesomeIcon icon={faHeart} id="heart" /></button>
+              {/* <button className={`like-button`} onClick={handleClick}></button> */}
+            </>
+            }
+          </h4>
+          {/* {state.likeCount > 0 && <h1>{likesList}</h1>} */}
+        </div>
         <div className="comment-section"></div>
         <h4>Comments</h4>
         {cookies.session ? (
@@ -203,7 +214,7 @@ export default function IndividualPost() {
                 placeholder="Leave a comment"
                 value={state.comment}
                 onChange={(event) =>
-                  setState({ ...state, comment: event.target.value })
+                  setState((prev) => ({ ...prev, comment: event.target.value }))
                 }
               />
             </form>
@@ -225,21 +236,8 @@ export default function IndividualPost() {
         <div className="comments">
           {commentList}
         </div>
-        {cookies.session ? (
-          <>
-            <button onClick={() => LikePost()}>like</button>
-
-            <button className={`like-button`} onClick={handleClick}>
-              <span className="likes-counter">{`LikeCount | ${state.likeCount}`}</span>
-            </button>
-          </>
-        ) : (
-          <>
-            <h4>Likes: {state.likeCount}</h4>
-          </>
-        )}
-        <div>{contextHolder}</div>
       </div>
+      <div>{contextHolder}</div>
     </section>
   );
 }

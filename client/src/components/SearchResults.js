@@ -29,7 +29,7 @@ export default function SearchResults() {
     <div className="search-results">
       {state.isLoading ? <h3>Loading...</h3> : 
       <div className="container">
-        <h3>Showing results for</h3>
+        <h3 className="title">Search results</h3>
       <div className="row row-cols-4">
         {renderedResults}
       </div>

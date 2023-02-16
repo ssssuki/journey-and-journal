@@ -8,7 +8,12 @@ module.exports = (db) => {
   });
   router.get("/comments/:id", (request, response) => {
     db.query(
-      `SELECT comments.*, users.username FROM comments JOIN users ON comments.user_id = users.id WHERE post_id=${request.params.id}`
+      `SELECT comments.*, users.username 
+      FROM comments 
+      JOIN users 
+      ON comments.user_id = users.id 
+      WHERE post_id=${request.params.id}
+      ORDER BY comments.id ASC`
     ).then(({ rows: comments }) => {
       response.json(comments);
     });

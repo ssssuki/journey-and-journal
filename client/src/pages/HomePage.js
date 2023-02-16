@@ -35,7 +35,7 @@ export default function HomePage() {
   return (
     <main>
 
-      <Parallax pages={2}>
+      <Parallax pages={2.5}>
         <ParallaxLayer
           speed={0.8}
           style={{
