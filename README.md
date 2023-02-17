@@ -24,7 +24,7 @@ The target audience are family and friends who want to post and remember their v
 - Front-End: ReactJS
 - Back-End: ExpressJS
 - Database: PostgreSQL
-- Frameworks: SASS, Bootstrap
+- Frameworks: Axios, SASS, Bootstrap, GoogleMapAPI,
 
 ### DB Setup
 
