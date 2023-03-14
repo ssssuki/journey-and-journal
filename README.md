@@ -1,6 +1,8 @@
+#Journey and Journal
+##Share your Journey!
 
 
-## Project in Action - [Journey and Journal]([https://jobflow.onrender.com/](http://www.journeyandjournal.click/))
+## Project in Action - [Journey and Journal](https://jobflow.onrender.com/](http://www.journeyandjournal.click/)
 
 
 ### Journey and Journal
