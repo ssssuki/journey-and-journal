@@ -2,7 +2,7 @@
 ##Share your Journey!
 
 
-## Project in Action -https://jobflow.onrender.com/](http://www.journeyandjournal.click
+## Project in Action  http://www.journeyandjournal.click
 
 
 ### Journey and Journal
