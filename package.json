@@ -7,9 +7,10 @@
     "start": "node bin/www",
     "local": "./node_modules/.bin/nodemon -L --ignore public/ --ignore client/",
     "db:reset": "node bin/resetdb.js",
-    "setup-production": "npm run install-client && npm run build-client && npm install",
+    "setup-production": "npm install && npm run install-client && npm run run-client",
     "install-client": "cd client && npm install",
-    "build-client": "cd client && npm run build"
+    "build-client": "cd client && npm run build",
+    "run-client": "cd client && npm run start"
   },
   "dependencies": {
     "chalk": "^2.4.2",
